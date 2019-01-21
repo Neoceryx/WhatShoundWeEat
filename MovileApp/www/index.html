@@ -16,8 +16,8 @@
 
     </head>
 
-    <body ng-app="Login" ng-controller="LoginCtrl">
-        <ons-page>
+    <body>
+        <ons-page ng-app="Login" ng-controller="LoginCtrl">
         <div style="margin-top:45%">
         
             <div style="text-align:center">
@@ -27,23 +27,23 @@
             <div class="content">
                 <div style="text-align:center">
                     <p>
-                        <label for="username">
-                            <ons-icon icon="fa-envelope"></ons-icon>
-                        </label>
-                        <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+                        <label for="username"><ons-icon icon="fa-envelope"></ons-icon></label>
+                        <ons-input id="username" modifier="underbar" placeholder="Email" float ng-model="Email"></ons-input>
                     </p>
         
                     <p>
-                        <label for="Password">
-                            <ons-icon icon="fa-lock"></ons-icon>
-                        </label>
-                        <ons-input id="Password" modifier="underbar" placeholder="Password" float></ons-input>
+                        <label for="Password"><ons-icon icon="fa-lock"></ons-icon></label>
+                        <ons-input id="Password" modifier="underbar" placeholder="Password" float ng-model="Password" type="Password"></ons-input>                                                
                     </p>
-        
+
                     <p>
                         <ons-button ng-click="LoginUser()" modifier="" class="rounded" style="width:65%">Login</ons-button>
                     </p>
-        
+
+                    <p>
+                        <ons-button modifier="quiet" style="color:#868585; font-size:70%">Forgot Password</ons-button>
+                    </p>
+                
                 </div>
             </div>
         

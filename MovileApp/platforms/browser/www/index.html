@@ -16,37 +16,38 @@
 
     </head>
 
-    <body ng-app="Login" ng-controller="LoginCtrl">
-        <ons-page>
+    <body>
+        <ons-page ng-app="Login" ng-controller="LoginCtrl">
+        <div style="margin-top:45%">
         
-            <div style="margin-top:45%">
-
-                <div style="text-align:center">
-                    <img id="cs_Logo" src="img\user.png" alt="">
-                </div>
-            
-                <!-- <ons-card>             -->
-                    <div class="content">
-                        <div style="text-align:center">
-                            <p>
-                                <label for="username"><ons-icon icon="fa-envelope"></ons-icon></label>
-                                <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
-                            </p>
-            
-                            <p>
-                                <label for="Password"><ons-icon icon="fa-lock"></ons-icon></label>
-                                <ons-input id="Password" modifier="underbar" placeholder="Password" float></ons-input>
-                            </p>
-            
-                            <p>
-                                <ons-button ng-click="LoginUser()" modifier="" class="rounded" style="width:65%" >Login</ons-button>
-                            </p>
-            
-                        </div>
-                    </div>            
-                <!-- </ons-card> -->
-
+            <div style="text-align:center">
+                <img id="cs_Logo" src="img\user.png" alt="">
             </div>
+        
+            <div class="content">
+                <div style="text-align:center">
+                    <p>
+                        <label for="username"><ons-icon icon="fa-envelope"></ons-icon></label>
+                        <ons-input id="username" modifier="underbar" placeholder="Email" float ng-model="Email"></ons-input>
+                    </p>
+        
+                    <p>
+                        <label for="Password"><ons-icon icon="fa-lock"></ons-icon></label>
+                        <ons-input id="Password" modifier="underbar" placeholder="Password" float ng-model="Password" type="Password"></ons-input>                                                
+                    </p>
+
+                    <p>
+                        <ons-button ng-click="LoginUser()" modifier="" class="rounded" style="width:65%">Login</ons-button>
+                    </p>
+
+                    <p>
+                        <ons-button modifier="quiet" style="color:#868585; font-size:70%">Forgot Password</ons-button>
+                    </p>
+                
+                </div>
+            </div>
+        
+        </div>
 
         </ons-page>
     </body>
