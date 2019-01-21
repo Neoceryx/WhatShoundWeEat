@@ -7,17 +7,48 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+        
         <link rel="stylesheet" href="OnsenUI-dist-2.10.6\css\onsenui.min.css">
         <link rel="stylesheet" href="OnsenUI-dist-2.10.6\css\dark-onsen-css-components.min.css">
+        <link rel="stylesheet" href="css\login.css">
+
         <title>Login</title>
+
     </head>
 
     <body ng-app="Login" ng-controller="LoginCtrl">
         <ons-page>
-                <ons-button modifier="large">Click Me</ons-button>
-                {{Msg}}
-        </ons-page>
+        
+            <div style="margin-top:45%">
 
+                <div style="text-align:center">
+                    <img id="cs_Logo" src="img\user.png" alt="">
+                </div>
+            
+                <!-- <ons-card>             -->
+                    <div class="content">
+                        <div style="text-align:center">
+                            <p>
+                                <label for="username"><ons-icon icon="fa-envelope"></ons-icon></label>
+                                <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+                            </p>
+            
+                            <p>
+                                <label for="Password"><ons-icon icon="fa-lock"></ons-icon></label>
+                                <ons-input id="Password" modifier="underbar" placeholder="Password" float></ons-input>
+                            </p>
+            
+                            <p>
+                                <ons-button ng-click="LoginUser()" modifier="" class="rounded" style="width:65%" >Login</ons-button>
+                            </p>
+            
+                        </div>
+                    </div>            
+                <!-- </ons-card> -->
+
+            </div>
+
+        </ons-page>
     </body>
     
     <script type="text/javascript" src="cordova.js"></script>
@@ -25,6 +56,7 @@
 
     <!-- Angular js -->
     <script src="js\Angularjs1.7.6.min.js"></script>
+    <script src="OnsenUI-dist-2.10.6\js\angular-onsenui.min.js"></script>
 
     <script src="js\App\Login.js"></script>
 

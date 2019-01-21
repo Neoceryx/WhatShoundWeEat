@@ -1,6 +1,12 @@
-var app = angular.module('Login',[]);
+var app = angular.module('Login',['onsen']);
+
+// Start Login Controller
 app.controller('LoginCtrl', function ($scope) {
-   
-    $scope.Msg="Angular js Say Hello";
+
+    $scope.LoginUser = function (params) {
+        alert("Hi");
+    }
+
 
 });
+// End Login controller
