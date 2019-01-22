@@ -18,7 +18,7 @@ namespace SWETAPIS.Models
         public int VotingListItems_Id { get; set; }
         public int Users_Id { get; set; }
     
-        public virtual User User { get; set; }
         public virtual VotingListItem VotingListItem { get; set; }
+        public virtual User User { get; set; }
     }
 }

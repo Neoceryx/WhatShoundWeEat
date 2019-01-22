@@ -12,14 +12,15 @@ namespace SWETAPIS.Models
         WSWETEntities _context = new WSWETEntities();
         #endregion
 
-        public User LoginUser(String EMAIL, String PASSWORD) {
+        public User LoginUser(String USRNAME, String PASSWORD) {
 
             User _usr = new User();
 
             // Handling Errors
             try
             {
-                _usr = _context.Users.Where(x => x.Email == EMAIL && x.Password == PASSWORD).FirstOrDefault();
+                // Get user if is Active
+                _usr = _context.Users.Where(x => x.UserName == USRNAME && x.Password == PASSWORD && x.IsActive == true).FirstOrDefault();
 
             }
             catch (Exception ex)

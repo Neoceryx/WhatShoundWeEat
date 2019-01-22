@@ -29,9 +29,9 @@ namespace SWETAPIS.Models
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<StatusRequest> StatusRequests { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vote> Votes { get; set; }
         public virtual DbSet<VotingList> VotingLists { get; set; }
         public virtual DbSet<VotingListItem> VotingListItems { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Http.Cors; // To Allow Use Access-Control-Allow-Origin
+using SWETAPIS.Models;
 
 namespace SWETAPIS.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : Controller
     {
+        #region Variables
+        UserRepository _usrBll = new UserRepository();
+        #endregion
+
         // GET: User
         public ActionResult Index()
         {
@@ -20,9 +27,9 @@ namespace SWETAPIS.Controllers
         }
 
         [HttpPost]
-        public JsonResult LoginUser(String EMAIL, String PASSWORD) {
+        public JsonResult LoginUser(String USRNAME, String PASSWORD) {
 
-            return Json("aaaa");
+            return Json(_usrBll.LoginUser(USRNAME, PASSWORD),JsonRequestBehavior.AllowGet);
 
         }
         // End Function

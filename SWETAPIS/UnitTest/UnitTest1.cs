@@ -10,12 +10,15 @@ namespace UnitTest
         [TestMethod]
         public void LoginUserTest()
         {
-            SWETAPIS.Models.UserRepository _usrBll = new SWETAPIS.Models.UserRepository();
+            //SWETAPIS.Models.UserRepository _usrBll = new SWETAPIS.Models.UserRepository();
+
+            SWETAPIS.Controllers.UserController _usrBll = new SWETAPIS.Controllers.UserController();
 
             String Email = "daniel.fierro@mitechnologiesinc.com";
             String Pass = "123456";
 
-            _usrBll.LoginUser(Email, Pass);
+            //var data =  _usrBll.LoginUser(Email, Pass);
+            var data = _usrBll.LoginUser(Email, Pass);
 
         }
 
