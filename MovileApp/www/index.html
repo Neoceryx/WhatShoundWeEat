@@ -21,6 +21,7 @@
 
         <ons-navigator ons-navigator swipeable var="myNavigator" page="login.html"></ons-navigator>
 
+        <!-- Start Login View Content -->
         <template id="login.html">
             <ons-page ng-controller="LoginCtrl">
                 <div style="margin-top:45%">
@@ -34,7 +35,7 @@
                             <span style="color:#d68600">{{Msg}}</span>
                             <p>
                                 <label for="username">
-                                    <ons-icon icon="fa-envelope"></ons-icon>
+                                    <ons-icon icon="fa-user"></ons-icon>
                                 </label>
                                 <ons-input id="username" modifier="underbar" placeholder="User name" float ng-model="UsrName"></ons-input>
                             </p>
@@ -65,12 +66,89 @@
                 </div>
             </ons-page>
         </template>
+        <!-- End Login View Content -->
 
+        <!-- Start SignIn  Content -->
         <template id="Signin.html">
-            <ons-page ng-controller="LoginCtrl">
-                <p>Signin</p>
+            <ons-page ng-controller="SignInCtrl">
+
+                <ons-toolbar>
+                    <div class="left"> <ons-back-button></ons-back-button> </div>
+                </ons-toolbar>
+
+                <div>
+                    <h3 style="text-align:center; border-bottom: 2px solid #d68600;">SIGN IN</h3>
+                </div>
+
+                <div style="text-align:center; margin-top: 15%">
+                    <img src="img\account.png" alt="">
+                </div>
+
+                <!-- Start Register Form -->
+                <div style="text-align: center; margin-top:15%">
+                    <p>
+                        <label><ons-icon icon="fa-user"></ons-icon></label>
+                        <ons-input class="cs_sign" modifier="underbar" type="text" placeholder="Personal Name" float></ons-input>
+                    </p>
+
+                    <p>
+                        <label><ons-icon icon="fa-user"></ons-icon></label>
+                        <ons-input class="cs_sign" modifier="underbar" type="text" placeholder="Surname" float></ons-input>
+                    </p>
+
+                    <!-- UserName and PassWord -->
+                    <p>
+                        <ons-row>
+                            <ons-col width="50%">
+                                <label for="usrname"> <ons-icon icon="fa-user-circle"></ons-icon> </label>
+                                <ons-input id="usrname" style="width:75%" modifier="underbar" type="text" placeholder="User Name" float></ons-input>
+                            </ons-col>
+
+                            <ons-col width="50%">
+                                    <label>
+                                        <ons-icon icon="fa-lock"></ons-icon>
+                                    </label>
+                                    <ons-input style="width:75%" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+                            </ons-col>
+
+                        </ons-row>
+                    </p>
+                    <!-- UserName and PassWord -->
+
+                    <p>
+                        <label><ons-icon icon="fa-envelope"></ons-icon></label>
+                        <ons-input class="cs_sign" modifier="underbar" type="text" placeholder="Email" float></ons-input>
+                    </p>
+
+                    <!-- Gender radio buttons -->
+                    <p>
+                        <ons-row>
+                            <ons-col width="30%">
+                                <ons-radio name="color" input-id="radio-1" ng-model="Gender" value="M"></ons-radio>
+                                <label for="radio-1" class="center">Male</label>
+                            </ons-col>
+                            <ons-col width="30%">
+                                <ons-radio name="color" input-id="radio-1" ng-model="Gender" value="F"></ons-radio>
+                                <label for="radio-1" class="center">Female</label>
+                            </ons-col>
+                            <ons-col width="30%">
+                                <ons-radio name="color" input-id="radio-1" ng-model="Gender" value="O"></ons-radio>
+                                <label for="radio-1" class="center">Other</label>
+                            </ons-col>
+                        </ons-row>
+                    </p>
+
+                    <p>
+                        <ons-button class="rounded" modifier="large">Create Account</ons-button>
+                    </p>
+
+
+                </div>
+                <!-- End Register Form -->
+
             </ons-page>
         </template>
+        <!-- End SignIn  Content -->
 
     </body>
     

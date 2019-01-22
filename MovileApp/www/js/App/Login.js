@@ -17,7 +17,7 @@ app.controller('LoginCtrl', function ($scope, $http) {
             url: "http://192.168.0.65/User/LoginUser",
             data:{USRNAME: $scope.UsrName, PASSWORD:$scope.Password}
         }).then(function (response) {
-            
+            debugger
             // Get Api Response
             var UserData = response.data
             
@@ -38,10 +38,19 @@ app.controller('LoginCtrl', function ($scope, $http) {
     }
 
     $scope.OpenSigIn = function () {
-        debugger
+        
         myNavigator.pushPage('Signin.html')
     }
-    ons.notification.alert('Hello, world')
 
 });
 // End Login controller
+
+// Start SignIn Controller
+app.controller('SignInCtrl', function ($scope, $http) {
+    
+    $scope.Gender="";
+
+    $scope.Msg="SignIn controler Say hello";
+
+})
+// End SignIn Controller

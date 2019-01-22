@@ -6,18 +6,18 @@ const SERVER="http://192.168.0.65/";
 // Start Login Controller
 app.controller('LoginCtrl', function ($scope, $http) {
 
-    $scope.Email="";
+    $scope.UsrName="";
     $scope.Password="";
 
-    $scope.LoginUser = function (params) {
+    $scope.LoginUser = function () {
         
         // Start http Request to get User Info
         $http({
             method:"POST",
             url: "http://192.168.0.65/User/LoginUser",
-            data:{EMAIL: $scope.Email, PASSWORD:$scope.Password}
+            data:{USRNAME: $scope.UsrName, PASSWORD:$scope.Password}
         }).then(function (response) {
-            
+            debugger
             // Get Api Response
             var UserData = response.data
             
@@ -37,6 +37,20 @@ app.controller('LoginCtrl', function ($scope, $http) {
 
     }
 
+    $scope.OpenSigIn = function () {
+        
+        myNavigator.pushPage('Signin.html')
+    }
 
 });
 // End Login controller
+
+// Start SignIn Controller
+app.controller('SignInCtrl', function ($scope, $http) {
+    
+    $scope.Gender="";
+
+    $scope.Msg="SignIn controler Say hello";
+
+})
+// End SignIn Controller
