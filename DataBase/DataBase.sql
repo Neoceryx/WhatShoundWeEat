@@ -6,9 +6,10 @@ USE WSWET
 create table Users(
 
 Id int identity(1,1) primary key,
-Name varchar(100) not null,
+PersonalName varchar(100) not null,
 Surnames varchar(500) not null,
 Gender char(1) not null CHECK(Gender IN ('M', 'F', 'O')),
+UserName varchar(50) not null,
 Email varchar(500) not null,
 Password varchar(500) not null,
 ProfilePicture varchar(500),
@@ -56,7 +57,7 @@ create table VotingList(
 Id int identity(1,1) primary key,
 Groups_Id int not null,
 ListName varchar(250) not null,
-ScheduledDate datetime not null,
+ScheduledDate datetime,
 IsActive bit not null,
 CreatedDate dateTime DEFAULT GETDATE(),
 
@@ -65,14 +66,27 @@ FOREIGN KEY(Groups_Id) REFERENCES Groups(Id)
 
 )
 
-create table Votes(
+create table VotingListItems(
+
 Id int identity(1,1) primary key,
 VotingList_Id int not null,
+ItenName varchar(200) not null,
 Users_Id int not null,
 
--- FOREIGN KEY
-FOREIGN KEY(VotingList_Id) REFERENCES VotingList(Id),
+-- Foregin Keys
+FOREIGN KEY (VotingList_Id) REFERENCES VotingList(Id),
 FOREIGN KEY(Users_Id) REFERENCES Users(Id)
 
 )
 
+create table Votes(
+
+Id int identity(1,1) primary key,
+VotingListItems_Id int not null,
+Users_Id int not null,
+
+-- FOREIGN KEY
+FOREIGN KEY(VotingListItems_Id) REFERENCES VotingListItems(Id),
+FOREIGN KEY(Users_Id) REFERENCES Users(Id)
+
+)

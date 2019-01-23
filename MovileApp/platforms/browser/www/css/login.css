@@ -1,0 +1,19 @@
+
+#cs_Logo{
+    border-color: white;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.rounded{
+    border-radius: 28px;
+}
+
+.cs_sign{
+    width: 90%
+}
+
+.cs_error{
+    font-size: small;
+    color: #E12E4B;
+}

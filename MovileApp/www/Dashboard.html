@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    
+    <link rel="stylesheet" href="OnsenUI\css\onsenui.css">
+    <link rel="stylesheet" href="OnsenUI\css\dark-onsen-css-components.min.css">
+    <title>DashBoard</title>
+</head>
+<body ng-app="DashApp">
+
+    <ons-page ng-controller="DashCtrl">
+        
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button>
+                    <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">SrD</div>
+        </ons-toolbar>
+
+
+
+    </ons-page>
+
+</body>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script src="OnsenUI\js\onsenui.min.js"></script>
+
+<!-- Angular js -->
+<script src="js\Angularjs1.7.6.min.js"></script>
+<script src="OnsenUI\js\angular-onsenui.js"></script>
+
+<script src="js\App\DashBoard.js"></script>
+
+</html>

@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WSWETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdmissionRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Groups_Id" Type="int" Nullable="false" />
+          <Property Name="Users_Id" Type="int" Nullable="false" />
+          <Property Name="StatusRequest_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Users_Id" Type="int" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StatusRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonalName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Surnames" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ProfilePicture" Type="varchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Votes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VotingListItems_Id" Type="int" Nullable="false" />
+          <Property Name="Users_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VotingList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Groups_Id" Type="int" Nullable="false" />
+          <Property Name="ListName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ScheduledDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VotingListItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VotingList_Id" Type="int" Nullable="false" />
+          <Property Name="ItenName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Users_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Admission__Group__1A14E395">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="AdmissionRequests" Type="Self.AdmissionRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmissionRequests">
+              <PropertyRef Name="Groups_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admission__Statu__1BFD2C07">
+          <End Role="StatusRequest" Type="Self.StatusRequest" Multiplicity="1" />
+          <End Role="AdmissionRequests" Type="Self.AdmissionRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmissionRequests">
+              <PropertyRef Name="StatusRequest_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admission__Users__1B0907CE">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AdmissionRequests" Type="Self.AdmissionRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmissionRequests">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__Users_Id__15502E78">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Votes__Users_Id__276EDEB3">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Votes" Type="Self.Votes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Votes">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Votes__VotingLis__267ABA7A">
+          <End Role="VotingListItems" Type="Self.VotingListItems" Multiplicity="1" />
+          <End Role="Votes" Type="Self.Votes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VotingListItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Votes">
+              <PropertyRef Name="VotingListItems_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotingLis__Group__1FCDBCEB">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="VotingList" Type="Self.VotingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotingList">
+              <PropertyRef Name="Groups_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotingLis__Users__239E4DCF">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="VotingListItems" Type="Self.VotingListItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotingListItems">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotingLis__Votin__22AA2996">
+          <End Role="VotingList" Type="Self.VotingList" Multiplicity="1" />
+          <End Role="VotingListItems" Type="Self.VotingListItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VotingList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotingListItems">
+              <PropertyRef Name="VotingList_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WSWETModelStoreContainer">
+          <EntitySet Name="AdmissionRequests" EntityType="Self.AdmissionRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusRequest" EntityType="Self.StatusRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Votes" EntityType="Self.Votes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VotingList" EntityType="Self.VotingList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VotingListItems" EntityType="Self.VotingListItems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Admission__Group__1A14E395" Association="Self.FK__Admission__Group__1A14E395">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="AdmissionRequests" EntitySet="AdmissionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admission__Statu__1BFD2C07" Association="Self.FK__Admission__Statu__1BFD2C07">
+            <End Role="StatusRequest" EntitySet="StatusRequest" />
+            <End Role="AdmissionRequests" EntitySet="AdmissionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admission__Users__1B0907CE" Association="Self.FK__Admission__Users__1B0907CE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AdmissionRequests" EntitySet="AdmissionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__Users_Id__15502E78" Association="Self.FK__Groups__Users_Id__15502E78">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Votes__Users_Id__276EDEB3" Association="Self.FK__Votes__Users_Id__276EDEB3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Votes" EntitySet="Votes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Votes__VotingLis__267ABA7A" Association="Self.FK__Votes__VotingLis__267ABA7A">
+            <End Role="VotingListItems" EntitySet="VotingListItems" />
+            <End Role="Votes" EntitySet="Votes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotingLis__Group__1FCDBCEB" Association="Self.FK__VotingLis__Group__1FCDBCEB">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="VotingList" EntitySet="VotingList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotingLis__Users__239E4DCF" Association="Self.FK__VotingLis__Users__239E4DCF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VotingListItems" EntitySet="VotingListItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotingLis__Votin__22AA2996" Association="Self.FK__VotingLis__Votin__22AA2996">
+            <End Role="VotingList" EntitySet="VotingList" />
+            <End Role="VotingListItems" EntitySet="VotingListItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WSWETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdmissionRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Groups_Id" Type="Int32" Nullable="false" />
+          <Property Name="Users_Id" Type="Int32" Nullable="false" />
+          <Property Name="StatusRequest_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__Admission__Group__1A14E395" FromRole="AdmissionRequests" ToRole="Groups" />
+          <NavigationProperty Name="StatusRequest" Relationship="Self.FK__Admission__Statu__1BFD2C07" FromRole="AdmissionRequests" ToRole="StatusRequest" />
+          <NavigationProperty Name="User" Relationship="WSWETModel.FK__Admission__Users__1B0907CE" FromRole="AdmissionRequest" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Users_Id" Type="Int32" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AdmissionRequests" Relationship="Self.FK__Admission__Group__1A14E395" FromRole="Groups" ToRole="AdmissionRequests" />
+          <NavigationProperty Name="VotingLists" Relationship="Self.FK__VotingLis__Group__1FCDBCEB" FromRole="Groups" ToRole="VotingList" />
+          <NavigationProperty Name="User" Relationship="WSWETModel.FK__Groups__Users_Id__15502E78" FromRole="Group" ToRole="User" />
+        </EntityType>
+        <EntityType Name="StatusRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AdmissionRequests" Relationship="Self.FK__Admission__Statu__1BFD2C07" FromRole="StatusRequest" ToRole="AdmissionRequests" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VotingListItems_Id" Type="Int32" Nullable="false" />
+          <Property Name="Users_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="VotingListItem" Relationship="Self.FK__Votes__VotingLis__2C3393D0" FromRole="Votes" ToRole="VotingListItems" />
+          <NavigationProperty Name="User" Relationship="WSWETModel.FK__Votes__Users_Id__276EDEB3" FromRole="Vote" ToRole="User" />
+        </EntityType>
+        <EntityType Name="VotingList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Groups_Id" Type="Int32" Nullable="false" />
+          <Property Name="ListName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ScheduledDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__VotingLis__Group__1FCDBCEB" FromRole="VotingList" ToRole="Groups" />
+          <NavigationProperty Name="VotingListItems" Relationship="Self.FK__VotingLis__Votin__276EDEB3" FromRole="VotingList" ToRole="VotingListItems" />
+        </EntityType>
+        <EntityType Name="VotingListItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VotingList_Id" Type="Int32" Nullable="false" />
+          <Property Name="ItenName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Users_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Votes" Relationship="Self.FK__Votes__VotingLis__2C3393D0" FromRole="VotingListItems" ToRole="Votes" />
+          <NavigationProperty Name="VotingList" Relationship="Self.FK__VotingLis__Votin__276EDEB3" FromRole="VotingListItems" ToRole="VotingList" />
+          <NavigationProperty Name="User" Relationship="WSWETModel.FK__VotingLis__Users__239E4DCF" FromRole="VotingListItem" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Admission__Group__1A14E395">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="AdmissionRequests" Type="Self.AdmissionRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmissionRequests">
+              <PropertyRef Name="Groups_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Admission__Statu__1BFD2C07">
+          <End Role="StatusRequest" Type="Self.StatusRequest" Multiplicity="1" />
+          <End Role="AdmissionRequests" Type="Self.AdmissionRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmissionRequests">
+              <PropertyRef Name="StatusRequest_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotingLis__Group__1FCDBCEB">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="VotingList" Type="Self.VotingList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotingList">
+              <PropertyRef Name="Groups_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Votes__VotingLis__2C3393D0">
+          <End Role="VotingListItems" Type="Self.VotingListItem" Multiplicity="1" />
+          <End Role="Votes" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VotingListItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Votes">
+              <PropertyRef Name="VotingListItems_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotingLis__Votin__276EDEB3">
+          <End Role="VotingList" Type="Self.VotingList" Multiplicity="1" />
+          <End Role="VotingListItems" Type="Self.VotingListItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VotingList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotingListItems">
+              <PropertyRef Name="VotingList_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WSWETEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdmissionRequests" EntityType="Self.AdmissionRequest" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="StatusRequests" EntityType="Self.StatusRequest" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Votes" EntityType="Self.Vote" />
+          <EntitySet Name="VotingLists" EntityType="Self.VotingList" />
+          <EntitySet Name="VotingListItems" EntityType="Self.VotingListItem" />
+          <AssociationSet Name="FK__Admission__Group__1A14E395" Association="Self.FK__Admission__Group__1A14E395">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="AdmissionRequests" EntitySet="AdmissionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Admission__Statu__1BFD2C07" Association="Self.FK__Admission__Statu__1BFD2C07">
+            <End Role="StatusRequest" EntitySet="StatusRequests" />
+            <End Role="AdmissionRequests" EntitySet="AdmissionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotingLis__Group__1FCDBCEB" Association="Self.FK__VotingLis__Group__1FCDBCEB">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="VotingList" EntitySet="VotingLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Votes__VotingLis__2C3393D0" Association="Self.FK__Votes__VotingLis__2C3393D0">
+            <End Role="VotingListItems" EntitySet="VotingListItems" />
+            <End Role="Votes" EntitySet="Votes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotingLis__Votin__276EDEB3" Association="Self.FK__VotingLis__Votin__276EDEB3">
+            <End Role="VotingList" EntitySet="VotingLists" />
+            <End Role="VotingListItems" EntitySet="VotingListItems" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="WSWETModel.User" />
+          <AssociationSet Name="FK__Admission__Users__1B0907CE" Association="WSWETModel.FK__Admission__Users__1B0907CE">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AdmissionRequest" EntitySet="AdmissionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__Users_Id__15502E78" Association="WSWETModel.FK__Groups__Users_Id__15502E78">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Group" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Votes__Users_Id__276EDEB3" Association="WSWETModel.FK__Votes__Users_Id__276EDEB3">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Vote" EntitySet="Votes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VotingLis__Users__239E4DCF" Association="WSWETModel.FK__VotingLis__Users__239E4DCF">
+            <End Role="User" EntitySet="Users" />
+            <End Role="VotingListItem" EntitySet="VotingListItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonalName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Surnames" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AdmissionRequests" Relationship="WSWETModel.FK__Admission__Users__1B0907CE" FromRole="User" ToRole="AdmissionRequest" />
+          <NavigationProperty Name="Groups" Relationship="WSWETModel.FK__Groups__Users_Id__15502E78" FromRole="User" ToRole="Group" />
+          <NavigationProperty Name="Votes" Relationship="WSWETModel.FK__Votes__Users_Id__276EDEB3" FromRole="User" ToRole="Vote" />
+          <NavigationProperty Name="VotingListItems" Relationship="WSWETModel.FK__VotingLis__Users__239E4DCF" FromRole="User" ToRole="VotingListItem" />
+        </EntityType>
+        <Association Name="FK__Admission__Users__1B0907CE">
+          <End Type="WSWETModel.User" Role="User" Multiplicity="1" />
+          <End Type="WSWETModel.AdmissionRequest" Role="AdmissionRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdmissionRequest">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__Users_Id__15502E78">
+          <End Type="WSWETModel.User" Role="User" Multiplicity="1" />
+          <End Type="WSWETModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Votes__Users_Id__276EDEB3">
+          <End Type="WSWETModel.User" Role="User" Multiplicity="1" />
+          <End Type="WSWETModel.Vote" Role="Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VotingLis__Users__239E4DCF">
+          <End Type="WSWETModel.User" Role="User" Multiplicity="1" />
+          <End Type="WSWETModel.VotingListItem" Role="VotingListItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotingListItem">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WSWETModelStoreContainer" CdmEntityContainer="WSWETEntities">
+          <EntitySetMapping Name="AdmissionRequests">
+            <EntityTypeMapping TypeName="WSWETModel.AdmissionRequest">
+              <MappingFragment StoreEntitySet="AdmissionRequests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Groups_Id" ColumnName="Groups_Id" />
+                <ScalarProperty Name="Users_Id" ColumnName="Users_Id" />
+                <ScalarProperty Name="StatusRequest_Id" ColumnName="StatusRequest_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="WSWETModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Users_Id" ColumnName="Users_Id" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusRequests">
+            <EntityTypeMapping TypeName="WSWETModel.StatusRequest">
+              <MappingFragment StoreEntitySet="StatusRequest">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WSWETModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Votes">
+            <EntityTypeMapping TypeName="WSWETModel.Vote">
+              <MappingFragment StoreEntitySet="Votes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VotingListItems_Id" ColumnName="VotingListItems_Id" />
+                <ScalarProperty Name="Users_Id" ColumnName="Users_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VotingLists">
+            <EntityTypeMapping TypeName="WSWETModel.VotingList">
+              <MappingFragment StoreEntitySet="VotingList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Groups_Id" ColumnName="Groups_Id" />
+                <ScalarProperty Name="ListName" ColumnName="ListName" />
+                <ScalarProperty Name="ScheduledDate" ColumnName="ScheduledDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VotingListItems">
+            <EntityTypeMapping TypeName="WSWETModel.VotingListItem">
+              <MappingFragment StoreEntitySet="VotingListItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VotingList_Id" ColumnName="VotingList_Id" />
+                <ScalarProperty Name="ItenName" ColumnName="ItenName" />
+                <ScalarProperty Name="Users_Id" ColumnName="Users_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WSWETModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Surnames" ColumnName="Surnames" />
+                <ScalarProperty Name="PersonalName" ColumnName="PersonalName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
