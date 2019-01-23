@@ -17,15 +17,30 @@ app.controller('LoginCtrl', function ($scope, $http) {
             url: "http://192.168.0.65/User/LoginUser",
             data:{USRNAME: $scope.UsrName, PASSWORD:$scope.Password}
         }).then(function (response) {
-            debugger
+            
             // Get Api Response
             var UserData = response.data
-            
+
             // validate if the user was founded
             if (UserData == "") {
                 $scope.Msg="This user is not registered";
             } else {
-                
+
+                // get the user info
+                var _data = {
+                    PNAME: UserData.PersonalName,
+                    SNAME: UserData.Surnames,
+                    USRNAME: UserData.UserName,
+                    PASS: UserData.Password,
+                    EMAIL: UserData.Email,
+                    GENDER: UserData.Gender
+                }
+
+                // save the user info on local storage
+                localStorage.setItem("UserInfo",JSON.stringify(_data))
+
+                // Redirect User to DashBoard View
+                window.location.href = "Dashboard.html";
             }
             // end user validation 
 
@@ -56,28 +71,28 @@ app.controller('SignInCtrl', function ($scope, $http) {
     $scope.Gender="";
 
     $scope.CreateNewAccount = function() {
-        
-        // Get Info from New user form 
-        var _data = {
-            PNAME:$scope.PersonalName,
-            SNAME:$scope.Surnames,
-            USRNAME:$scope.UserName,
-            PASS:$scope.Password,
-            EMAIL:$scope.Email,
-            GENDER:$scope.Gender
-        }
-        // End New User info
-
+ 
         // verify that form fields has the right value
         if ($scope.usrForm.$valid) {
-            
+
+            // Get Info from New user form 
+            var _data = {
+                PNAME: $scope.PersonalName,
+                SNAME: $scope.Surnames,
+                USRNAME: $scope.UserName,
+                PASS: $scope.Password,
+                EMAIL: $scope.Email,
+                GENDER: $scope.Gender
+            }
+            // End New User info
+
             // Start http request to register new user
             $http({
                 method: "POST",
                 url: SERVER + "User/RegisterUser",
                 data: _data
             }).then(function (response) {
-                debugger
+
                 // get the Api response
                 var Result = response.data;
 
@@ -85,7 +100,16 @@ app.controller('SignInCtrl', function ($scope, $http) {
                 switch (Result) {
 
                     case 0:
-                        console.log("new user was registered");                    
+
+                        // parse object to json string 
+                        var UserData = JSON.stringify(_data);
+
+                        // Save user data in local
+                        localStorage.setItem("UserInfo", UserData);
+
+                        // Redirect User to DashBoard View
+                        window.location.href = "Dashboard.html";
+
                         break;
 
                     case 1:
@@ -105,7 +129,7 @@ app.controller('SignInCtrl', function ($scope, $http) {
                 alert("Something happend while the user wa registered");
                 console.log(response);
             })
-        // End http request to register new user
+            // End http request to register new user
 
 
         }
