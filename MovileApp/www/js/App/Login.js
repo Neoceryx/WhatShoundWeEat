@@ -67,7 +67,7 @@ app.controller('SignInCtrl', function ($scope, $http) {
             GENDER:$scope.Gender
         }
         // End New User info
-        debugger
+
         // verify that form fields has the right value
         if ($scope.usrForm.$valid) {
             
@@ -77,7 +77,7 @@ app.controller('SignInCtrl', function ($scope, $http) {
                 url: SERVER + "User/RegisterUser",
                 data: _data
             }).then(function (response) {
-
+                debugger
                 // get the Api response
                 var Result = response.data;
 

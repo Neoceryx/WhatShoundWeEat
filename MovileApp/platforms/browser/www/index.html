@@ -76,12 +76,12 @@
 
                 <div><h3 style="text-align:center; border-bottom: 2px solid #d68600;">SIGN IN</h3></div>
 
-                <div style="text-align:center; margin-top: 15%">
+                <div style="text-align:center; margin-top: 10%">
                     <img src="img\account.png" alt="">
                 </div>
 
                 <!-- Start Register Form -->
-                <div style="text-align: center; margin-top:15%">
+                <div style="text-align: center; margin-top:10%">
                     <form name="usrForm">
                         <p>
                             <label>
@@ -95,7 +95,7 @@
                             <label>
                                 <ons-icon icon="fa-user"></ons-icon>
                             </label>
-                            <ons-input class="cs_sign" modifier="underbar" type="text" name="sname" placeholder="Surname *" float ng-model="Surnames" required></ons-input>
+                            <ons-input class="cs_sign" modifier="underbar" type="text" name="sname" placeholder="Surnames *" float ng-model="Surnames" required></ons-input>
                             <span class="cs_error" ng-show="usrForm.sname.$touched && usrForm.sname.$invalid">The surnames are required.</span>
                         </p>
                     
@@ -106,7 +106,7 @@
                                     <label for="usrname">
                                         <ons-icon icon="fa-user-circle"></ons-icon>
                                     </label>
-                                    <ons-input id="usrname" style="width:75%" modifier="underbar" type="text" placeholder="User Name*"
+                                    <ons-input id="usrname" style="width:75%" modifier="underbar" type="text" placeholder="User Name *"
                                         float ng-model="UserName" name="uname" required></ons-input>
                                         <span class="cs_error" ng-show="usrForm.uname.$touched && usrForm.uname.$invalid">The username is required.</span>
                                 </ons-col>
@@ -115,7 +115,7 @@
                                     <label>
                                         <ons-icon icon="fa-lock"></ons-icon>
                                     </label>
-                                    <ons-input style="width:75%" modifier="underbar" name="pass" type="password" placeholder="Password*" float ng-model="Password" required></ons-input>
+                                    <ons-input style="width:75%" modifier="underbar" name="pass" type="password" placeholder="Password *" float ng-model="Password" required></ons-input>
                                     <span class="cs_error" ng-show="usrForm.pass.$touched && usrForm.pass.$invalid">The password is required.</span>
                                 </ons-col>
                     
@@ -127,8 +127,8 @@
                             <label>
                                 <ons-icon icon="fa-envelope"></ons-icon>
                             </label>
-                            <ons-input class="cs_sign" modifier="underbar" type="text" placeholder="Email*" name="email" float ng-model="Email" required></ons-input>
-                            <span class="cs_error" ng-show="usrForm.email.$touched && usrForm.email.$invalid">The email is required.</span>
+                            <ons-input class="cs_sign" modifier="underbar" type="email" placeholder="Email*" name="uemail" float ng-model="Email" required></ons-input>
+                            <span class="cs_error" ng-show="usrForm.uemail.$error.required">valid email is required.</span>
                         </p>
                     
                         <!-- Gender radio buttons -->
