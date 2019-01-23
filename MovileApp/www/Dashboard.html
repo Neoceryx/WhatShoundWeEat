@@ -8,7 +8,10 @@
     
     <link rel="stylesheet" href="OnsenUI\css\onsenui.css">
     <link rel="stylesheet" href="OnsenUI\css\dark-onsen-css-components.min.css">
+    <link rel="stylesheet" href="css\login.css">
+
     <title>DashBoard</title>
+
 </head>
 <body ng-app="DashApp">
 
@@ -23,7 +26,18 @@
             <div class="center">SrD</div>
         </ons-toolbar>
 
-
+        <!-- Search gropus container -->
+        <div style="text-align:center; margin-top: 3%">
+            <ons-row class="cs_title">
+                <ons-col width="90%"> <h3>MY GROUPS</h3> </ons-col>
+                <ons-col width="10%"> <ons-button class="rounded" style="left:-266%;">+</ons-button> </ons-col>
+            </ons-row>             
+            
+            <p style="text-align: center; margin-top: 10px">
+                <ons-search-input placeholder="Search" style="width:100%"></ons-search-input>
+            </p>
+        </div>
+        <!-- Search gropus container -->
 
     </ons-page>
 
