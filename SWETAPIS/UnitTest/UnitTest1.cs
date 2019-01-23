@@ -7,7 +7,7 @@ namespace UnitTest
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
+        //[TestMethod]
         public void LoginUserTest()
         {
             //SWETAPIS.Models.UserRepository _usrBll = new SWETAPIS.Models.UserRepository();
@@ -21,6 +21,24 @@ namespace UnitTest
             var data = _usrBll.LoginUser(Email, Pass);
 
         }
+
+        [TestMethod]
+        public void RegisterUserTest() {
+
+            SWETAPIS.Models.UserRepository _usrBll = new SWETAPIS.Models.UserRepository();
+
+            String pname = "Daniel";
+            String sname = "Fierro Najera";
+            String usrname = "DanF";
+            String pass = "123456";
+            String Email = "danielF@gmail.com";
+            String gender = "M";
+
+            _usrBll.RegisterNewUser(pname, sname, usrname, pass, Email, gender);
+
+
+        }
+
 
     }
 }

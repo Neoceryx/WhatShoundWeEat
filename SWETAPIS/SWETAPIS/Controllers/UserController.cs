@@ -34,6 +34,15 @@ namespace SWETAPIS.Controllers
         }
         // End Function
 
+        [HttpPost]
+        public JsonResult RegisterUser(String PNAME, String SNAME, String USRNAME, String PASS, String EMAIL, String GENDER)
+        {
+            var Data = _usrBll.RegisterNewUser(PNAME, SNAME, USRNAME, PASS, EMAIL, GENDER);
+            
+            return Json(Data, JsonRequestBehavior.AllowGet);
+
+        }
+
 
     }
 }
