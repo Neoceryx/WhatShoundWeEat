@@ -67,7 +67,7 @@ app.controller('SignInCtrl', function ($scope, $http) {
             GENDER:$scope.Gender
         }
         // End New User info
-        
+        debugger
         // verify that form fields has the right value
         if ($scope.usrForm.$valid) {
             
@@ -85,6 +85,7 @@ app.controller('SignInCtrl', function ($scope, $http) {
                 switch (Result) {
 
                     case 0:
+                        console.log("new user was registered");                    
                         break;
 
                     case 1:
