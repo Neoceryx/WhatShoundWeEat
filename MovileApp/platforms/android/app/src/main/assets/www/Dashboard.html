@@ -30,7 +30,7 @@
         <div style="text-align:center; margin-top: 3%">
             <ons-row class="cs_title">
                 <ons-col width="90%"> <h3>MY GROUPS</h3> </ons-col>
-                <ons-col width="10%"> <ons-button class="rounded" style="left:-266%;" ng-click="newGroup.show();"><ons-icon icon="fa-plus"></ons-icon></ons-button> </ons-col>
+                <ons-col width="10%"> <ons-button class="rounded" style="left:-266%;">+</ons-button> </ons-col>
             </ons-row>             
             
             <p style="text-align: center; margin-top: 10px">
@@ -40,26 +40,17 @@
             <div style="margin-top: 25%;">
                 <img src="img\sad.png" alt="">
                 <h4 style="color:#dadada">you dont have grupos yet</h4>
-                <ons-button ripple style="background-color:#1a3b6d" ng-click="newGroup.show();">Start New group</ons-button>
+                <ons-button ripple style="background-color:#1a3b6d" ng-click="NewGroup.show()">Start New group</ons-button>
             </div>
 
         </div>
         <!-- Search gropus container -->
 
         <!-- Start New Group dialog -->
-        <ons-alert-dialog var="newGroup" ng-controller="DashCtrl">
-            <div class="alert-dialog-title">New Group</div>
+        <ons-alert-dialog var="NewGroup">
+            <div class="alert-dialog-title">Create new group</div>
             <div class="alert-dialog-content">
-                <form name="newGroupfrm">
-                    <p>
-                        <ons-input placeholder="Group name *" type="text" name="gname" ng-model="GroupName" modifier="underbar" float required></ons-input>
-                        <span class="cs_error" ng-show="!myForm.gname.$pristine">name is required.</span>
-                    </p>
-                </form>
-            </div>
-            <div class="alert-dialog-footer">
-                <button class="alert-dialog-button" ng-click="newGroup.hide()">Cancel</button>
-                <button class="alert-dialog-button" ng-click="CreateNewGroup()">Create</button>
+                asdasd
             </div>
         </ons-alert-dialog>
         <!-- Start New Group dialog -->

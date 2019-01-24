@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Http.Cors; // To Allow Use Access-Control-Allow-Origin
+using SWETAPIS.Models;
 
 namespace SWETAPIS.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GroupController : Controller
     {
-        // GET: Group
-        public ActionResult Index()
-        {
-            return View();
+        #region Variables
+        GroupRepository _gpBLL = new GroupRepository();
+        #endregion
+
+        [HttpPost]
+        public String RegisterNewGroup(String GROUPNAME, String USERNAME) {
+
+            return _gpBLL.RegisterNewGroup(GROUPNAME, USERNAME);
+
         }
+        // End method
+
+        [HttpPost]
+        public JsonResult GetallGroupsByUserId(String USERNAME) {
+            return Json(USERNAME, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

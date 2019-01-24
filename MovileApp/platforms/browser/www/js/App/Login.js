@@ -14,7 +14,7 @@ app.controller('LoginCtrl', function ($scope, $http) {
         // Start http Request to get User Info
         $http({
             method:"POST",
-            url: "http://192.168.0.65/User/LoginUser",
+            url: SERVER+"User/LoginUser",
             data:{USRNAME: $scope.UsrName, PASSWORD:$scope.Password}
         }).then(function (response) {
             
@@ -46,7 +46,7 @@ app.controller('LoginCtrl', function ($scope, $http) {
 
         },function ErrorCallBack(response) {
             alert("Error:");
-            console.log(response);
+            console.log(response.data);
         })
         // End http Request to get User Info
 

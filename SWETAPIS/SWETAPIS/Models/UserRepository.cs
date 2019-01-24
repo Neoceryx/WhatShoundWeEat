@@ -9,8 +9,12 @@ namespace SWETAPIS.Models
     {
         #region Variables
         // create context Object
-        WSWETEntities _context = new WSWETEntities();
+        WSWETEntities _context = new WSWETEntities();        
         #endregion
+
+        public UserRepository() {
+            _context.Configuration.ProxyCreationEnabled = false;
+        }
 
         public User LoginUser(String USRNAME, String PASSWORD) {
 
@@ -124,6 +128,28 @@ namespace SWETAPIS.Models
            
         }
         // End function
+
+        public int GetUserIdByUserName(String USERNAME){
+
+            int UserId = 0;
+
+            // Handling Errors
+            try
+            {
+                // Get the User Id By UserName. Id not exits, will return 0
+                 UserId = _context.Users.Where(x => x.UserName == USERNAME && x.IsActive == true).Select(u => u.Id).FirstOrDefault();
+                                 
+            }
+            catch (Exception ex)
+            {                
+            }
+            // Handling Errors
+
+            return UserId;
+
+        }
+        // End Method
+
 
     }
 }

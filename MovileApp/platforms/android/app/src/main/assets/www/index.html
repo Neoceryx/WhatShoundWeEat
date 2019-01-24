@@ -9,7 +9,6 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         
         <link rel="stylesheet" href="OnsenUI\css\onsenui.css">
-        <!-- <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css"> -->
         <link rel="stylesheet" href="OnsenUI\css\dark-onsen-css-components.min.css">
         <link rel="stylesheet" href="css\login.css">
 
@@ -72,35 +71,88 @@
         <template id="Signin.html">
             <ons-page ng-controller="SignInCtrl">
 
-                <ons-toolbar>
-                    <div class="left"> <ons-back-button></ons-back-button> </div>
-                </ons-toolbar>
+                <ons-toolbar><div class="left"> <ons-back-button></ons-back-button></div></ons-toolbar>
+
+                <div><h3 style="text-align:center; border-bottom: 2px solid #d68600;">SIGN IN</h3></div>
+
+                <div style="text-align:center; margin-top: 10%">
+                    <img src="img\account.png" alt="">
+                </div>
 
                 <!-- Start Register Form -->
-                <div style="text-align: center;">
-                    <p>
-                        <ons-input modifier="underbar" type="text" placeholder="Personal Name" float></ons-input>
-                    </p>
-
-                    <p>
-                        <ons-input modifier="underbar" type="text" placeholder="Surname" float></ons-input>
-                    </p>
-
-                    <p>
-                        <ons-input modifier="underbar" type="text" placeholder="User Name" float></ons-input>
-                    </p>
-
-                    <p>
-                        <ons-row>
-                            <ons-col width="33%">
-                                <ons-radio name="color" input-id="radio-1" ng-model="Gender" value="red"></ons-radio>
-                                <label for="radio-1" class="center">Red</label>
-                            </ons-col>
-                            <ons-col width="33%"><ons-radio name="color" input-id="radio-1" ng-model="Gender" value="red"></ons-radio></ons-col>
-                            <ons-col width="33%"><ons-radio name="color" input-id="radio-1" ng-model="Gender" value="red"></ons-radio></ons-col>
-                        </ons-row>
-                    </p>
-
+                <div style="text-align: center; margin-top:10%">
+                    <form name="usrForm">
+                        <p>
+                            <label>
+                                <ons-icon icon="fa-user"></ons-icon>
+                            </label>
+                            <ons-input class="cs_sign" name="pname" modifier="underbar" type="text" placeholder="Personal Name *" float ng-model="PersonalName" required></ons-input>
+                            <span class="cs_error" ng-show="usrForm.pname.$touched && usrForm.pname.$invalid">The name is required.</span>
+                        </p>
+                    
+                        <p>
+                            <label>
+                                <ons-icon icon="fa-user"></ons-icon>
+                            </label>
+                            <ons-input class="cs_sign" modifier="underbar" type="text" name="sname" placeholder="Surnames *" float ng-model="Surnames" required></ons-input>
+                            <span class="cs_error" ng-show="usrForm.sname.$touched && usrForm.sname.$invalid">The surnames are required.</span>
+                        </p>
+                    
+                        <!-- UserName and PassWord -->
+                        <p>
+                            <ons-row>
+                                <ons-col width="50%">
+                                    <label for="usrname">
+                                        <ons-icon icon="fa-user-circle"></ons-icon>
+                                    </label>
+                                    <ons-input id="usrname" style="width:75%" modifier="underbar" type="text" placeholder="User Name *"
+                                        float ng-model="UserName" name="uname" required></ons-input>
+                                        <span class="cs_error" ng-show="usrForm.uname.$touched && usrForm.uname.$invalid">The username is required.</span>
+                                </ons-col>
+                    
+                                <ons-col width="50%">
+                                    <label>
+                                        <ons-icon icon="fa-lock"></ons-icon>
+                                    </label>
+                                    <ons-input style="width:75%" modifier="underbar" name="pass" type="password" placeholder="Password *" float ng-model="Password" required></ons-input>
+                                    <span class="cs_error" ng-show="usrForm.pass.$touched && usrForm.pass.$invalid">The password is required.</span>
+                                </ons-col>
+                    
+                            </ons-row>
+                        </p>
+                        <!-- UserName and PassWord -->
+                    
+                        <p>
+                            <label>
+                                <ons-icon icon="fa-envelope"></ons-icon>
+                            </label>
+                            <ons-input class="cs_sign" modifier="underbar" type="email" placeholder="Email*" name="uemail" float ng-model="Email" required></ons-input>
+                            <span class="cs_error" ng-show="usrForm.uemail.$error.required">valid email is required.</span>
+                        </p>
+                    
+                        <!-- Gender radio buttons -->
+                        <p>
+                            <ons-row>
+                                <ons-col width="30%">
+                                    <ons-radio name="gender" input-id="radio-1" ng-model="Gender" value="M" required></ons-radio>
+                                    <label for="radio-1" class="center">Male</label>
+                                </ons-col>
+                                <ons-col width="30%">
+                                    <ons-radio name="gender" input-id="radio-2" ng-model="Gender" value="F"></ons-radio>
+                                    <label for="radio-1" class="center">Female</label>
+                                </ons-col>
+                                <ons-col width="30%">
+                                    <ons-radio name="gender" input-id="radio-3" ng-model="Gender" value="O"></ons-radio>
+                                    <label for="radio-1" class="center">Other</label>
+                                </ons-col>
+                                <span class="cs_error" style="margin-left: 28%" ng-show="usrForm.gender.$pristine && usrForm.gender.$invalid || usrForm.gender.$untouched">The gender is required.</span>
+                            </ons-row>
+                        </p>
+                    
+                        <p>
+                            <ons-button class="rounded" modifier="large" ng-click="CreateNewAccount()">Create Account</ons-button>
+                        </p>
+                    </form>
                 </div>
                 <!-- End Register Form -->
 
@@ -111,7 +163,6 @@
     </body>
     
     <script type="text/javascript" src="cordova.js"></script>
-    <!-- <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script> -->
     <script src="OnsenUI\js\onsenui.min.js"></script>
     
     <!-- Angular js -->
