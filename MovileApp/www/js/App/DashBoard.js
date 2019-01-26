@@ -77,6 +77,10 @@ app.controller("DashCtrl",function ($scope, $http) {
     }
     // End function
 
+    $scope.OpenGroupById=function (GroupId) {
+        debugger
+    }
+
     function GetMyGroups() {
         
         // Start http request to get all muy groups
