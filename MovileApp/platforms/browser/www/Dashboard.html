@@ -23,7 +23,10 @@
                     <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
                 </ons-toolbar-button>
             </div>
-            <div class="center">SrD</div>
+            <div class="center">{{UserData.USRNAME}}</div>
+            <div class="right">
+                <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded"><ons-icon icon="fa-sign-out"></ons-icon> log out</ons-button>
+            </div>
         </ons-toolbar>
 
         <!-- Search gropus container -->
@@ -34,7 +37,7 @@
             </ons-row>             
             
             <p style="text-align: center; margin-top: 10px">
-                <ons-search-input placeholder="Search" style="width:100%"></ons-search-input>
+                <ons-search-input placeholder="Search" ng-model="Srch" style="width:100%"></ons-search-input>
             </p>
 
             <!-- State Zero Container -->
@@ -48,7 +51,8 @@
         </div>
         <!-- Search gropus container -->
 
-        <ons-card ng-repeat="g in Groups">
+        <!-- Start Group List Item -->
+        <ons-card ng-repeat="g in Groups | filter:Srch">
             <div class="title">
                 <ons-row>
                     <ons-col width="50%">
@@ -56,14 +60,13 @@
                     </ons-col>
 
                     <ons-col width="50%" style="text-align:end;">
+                        <span ng-if="g.IsAdmin"><ons-icon icon="fa-bookmark" class="cs_notadmn"></ons-icon></span>
                         <span><ons-icon icon="fa-user" class="cs_not"></ons-icon> <span class="notification cs_notm notification--material">1</span></span>
                     </ons-col>
                 </ons-row>
-            </div>
-
-            <div class="content">
-            </div>
+            </div>        
         </ons-card>
+        <!-- Start Group List Item -->
 
         <!-- Start New Group dialog -->
         <ons-alert-dialog var="newGroup" ng-controller="DashCtrl">

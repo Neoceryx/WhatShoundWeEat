@@ -7,7 +7,7 @@ app.controller("DashCtrl",function ($scope, $http) {
     const SERVER="http://192.168.0.65/";
 
     // recover user infor from local storage
-    var UserData = JSON.parse(localStorage.getItem("UserInfo"));
+    $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
     
     $scope.GroupName="";
 
@@ -23,7 +23,7 @@ app.controller("DashCtrl",function ($scope, $http) {
             $http({
                 method:"POST",
                 url:SERVER+"Group/RegisterNewGroup",
-                data:{GROUPNAME: $scope.GroupName, USERNAME: UserData.USRNAME}
+                data:{GROUPNAME: $scope.GroupName, USERNAME: $scope.UserData.USRNAME}
             }).then(function (response) {
                 
                 // get Api response
@@ -66,13 +66,24 @@ app.controller("DashCtrl",function ($scope, $http) {
     }
     // End function
 
+    $scope.logOutUser=function () {
+        
+        // clear user data
+        localStorage.clear();
+        
+        // Redirect User to Login View
+        window.location.href = "index.html";
+
+    }
+    // End function
+
     function GetMyGroups() {
         
         // Start http request to get all muy groups
         $http({
             method:"POST",
             url: SERVER+"Group/GetActivesGroupsByUserId",
-            data:{USERNAME: UserData.USRNAME}
+            data:{USERNAME: $scope.UserData.USRNAME}
         }).then(function (response) {
             
             $scope.Groups = response.data
@@ -85,6 +96,7 @@ app.controller("DashCtrl",function ($scope, $http) {
         // Start http request to get all muy groups    
 
     }
+    // End Function
 
     
 });
