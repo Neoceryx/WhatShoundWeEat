@@ -77,9 +77,9 @@ app.controller("DashCtrl",function ($scope, $http) {
     }
     // End function
 
-    $scope.OpenGroupById=function (GroupId, GroupName) {
+    $scope.OpenGroupById=function (GroupId) {
         debugger
-        this.myNavigator.pushPage('groupInfo.html', {data: {groupId: GroupId, groupName:GroupName}})
+        this.myNavigator.pushPage('groupInfo.html', {data: {groupId: GroupId}})
     }
 
     function GetMyGroups() {
