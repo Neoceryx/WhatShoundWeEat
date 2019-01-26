@@ -24,8 +24,8 @@ namespace SWETAPIS.Controllers
         // End method
 
         [HttpPost]
-        public JsonResult GetallGroupsByUserId(String USERNAME) {
-            return Json(USERNAME, JsonRequestBehavior.AllowGet);
+        public JsonResult GetActivesGroupsByUserId(String USERNAME) {
+            return Json(_gpBLL.GetActivesGroupsByUserId(USERNAME), JsonRequestBehavior.AllowGet);
         }
 
     }

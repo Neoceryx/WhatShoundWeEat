@@ -86,5 +86,37 @@ namespace SWETAPIS.Models
         }
         // End Method
 
+        public List<GroupsViewModel> GetActivesGroupsByUserId(String USERNAME)
+        {
+
+            // Initialize the List
+            List<GroupsViewModel> MyGroups = new List<GroupsViewModel>();
+
+            // Handling Errors
+            try
+            {
+
+                // Recover UserId byUserName
+                int UserId = _userBLL.GetUserIdByUserName(USERNAME);
+
+                // Build the query. to get the groups by UserId and AdmissionRequests
+                String Query = @"SELECT Groups.Id, GroupName, Groups.Users_Id, IsAdmin, IsActive, CreatedDate
+                                ,(select COUNT(*) FROM AdmissionRequests where Groups_Id = Groups.Id AND StatusRequest_Id = 1)[AdmissionRequests]
+                                FROM Groups WHERE Users_Id = {0} AND IsActive = 1";
+
+                // Get all Groups by user id
+                MyGroups = _context.Database.SqlQuery<GroupsViewModel>(Query, UserId).ToList();
+
+            }
+            catch (Exception ex)
+            {
+            }
+            // Handling Errors
+
+            return MyGroups;
+
+
+        }
+
     }
 }

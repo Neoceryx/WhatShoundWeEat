@@ -39,7 +39,7 @@ namespace UnitTest
 
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void RegisterNewGroup() {
 
             SWETAPIS.Models.GroupRepository _gpBll = new SWETAPIS.Models.GroupRepository();
@@ -51,6 +51,16 @@ namespace UnitTest
 
             var data = _gpBll.RegisterNewGroup(GRUPONAME, USERNAME);
 
+        }
+        
+        [TestMethod]
+        public void GetGropusByUserIdTest()
+        {
+            SWETAPIS.Models.GroupRepository _gpBLL = new SWETAPIS.Models.GroupRepository();
+
+            String UserName = "e";
+            var data = _gpBLL.GetActivesGroupsByUserId(UserName);
+        
         }
 
     }

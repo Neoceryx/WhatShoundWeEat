@@ -143,6 +143,7 @@
       <DependentUpon>WSWET.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRepository.cs" />
+    <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Models\Vote.cs">
       <DependentUpon>WSWET.tt</DependentUpon>
     </Compile>
