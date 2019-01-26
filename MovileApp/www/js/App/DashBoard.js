@@ -8,8 +8,7 @@ app.controller("DashCtrl",function ($scope, $http) {
 
     // recover user infor from local storage
     var UserData = JSON.parse(localStorage.getItem("UserInfo"));
-    console.table(UserData);
-
+    
     $scope.GroupName="";
 
     // load all Groups by UserId
@@ -72,10 +71,13 @@ app.controller("DashCtrl",function ($scope, $http) {
         // Start http request to get all muy groups
         $http({
             method:"POST",
-            url: SERVER+"Group/GetallGroupsByUserId",
+            url: SERVER+"Group/GetActivesGroupsByUserId",
             data:{USERNAME: UserData.USRNAME}
         }).then(function (response) {
-            debugger
+            
+            $scope.Groups = response.data
+            console.table($scope.Groups);
+            
         },function ErrorCallBack(response) {
             alert("Error to get your Groups");
             console.log(response.data);

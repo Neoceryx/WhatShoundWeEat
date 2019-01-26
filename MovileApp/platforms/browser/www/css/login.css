@@ -21,3 +21,10 @@
 .cs_title{
     border-bottom: 2px solid #d68600;
 }
+
+.cs_not{
+    font-size: small;
+}
+.cs_notm{
+    background-color: #17B9EB
+}

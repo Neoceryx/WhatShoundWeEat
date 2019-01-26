@@ -37,14 +37,32 @@
                 <ons-search-input placeholder="Search" style="width:100%"></ons-search-input>
             </p>
 
-            <div style="margin-top: 25%;">
+            <!-- State Zero Container -->
+            <div style="margin-top: 25%;" ng-if="Groups.length == 0">
                 <img src="img\sad.png" alt="">
                 <h4 style="color:#dadada">you dont have grupos yet</h4>
                 <ons-button ripple style="background-color:#1a3b6d" ng-click="newGroup.show();">Start New group</ons-button>
             </div>
+            <!-- State Zero Container -->
 
         </div>
         <!-- Search gropus container -->
+
+        <!-- Start Group List Item -->
+        <ons-card ng-repeat="g in Groups">
+            <div class="title">
+                <ons-row>
+                    <ons-col width="50%">
+                        <ons-icon icon="fa-users"></ons-icon> {{g.GroupName | uppercase}}
+                    </ons-col>
+
+                    <ons-col width="50%" style="text-align:end;">
+                        <span><ons-icon icon="fa-user" class="cs_not"></ons-icon> <span class="notification cs_notm notification--material">1</span></span>
+                    </ons-col>
+                </ons-row>
+            </div>        
+        </ons-card>
+        <!-- Start Group List Item -->
 
         <!-- Start New Group dialog -->
         <ons-alert-dialog var="newGroup" ng-controller="DashCtrl">
