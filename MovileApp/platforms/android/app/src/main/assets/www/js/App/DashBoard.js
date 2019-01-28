@@ -33,7 +33,15 @@ app.controller("DashCtrl",function ($scope, $http) {
                 switch (Result[0]) {
 
                     case "0":
-                        console.log("New GroupId created: "+ Result[1]);
+                        // close the create new group dialog
+                        this.newGroup.hide();
+
+                        // Refresh the Groups List
+                        GetMyGroups();
+
+                        // Redirect user to Group Details View
+                        // this.myNavigator.pushPage('groupInfo.html', {data: {groupId: Result[1]}})
+
                         break;
 
                     case "1":                        
@@ -78,7 +86,8 @@ app.controller("DashCtrl",function ($scope, $http) {
     // End function
 
     $scope.OpenGroupById=function (GroupId) {
-        debugger
+        
+        this.myNavigator.pushPage('groupInfo.html', {data: {groupId: GroupId}})
     }
 
     function GetMyGroups() {
@@ -89,9 +98,8 @@ app.controller("DashCtrl",function ($scope, $http) {
             url: SERVER+"Group/GetActivesGroupsByUserId",
             data:{USERNAME: $scope.UserData.USRNAME}
         }).then(function (response) {
-            
+            debugger            
             $scope.Groups = response.data
-            console.table($scope.Groups);
             
         },function ErrorCallBack(response) {
             alert("Error to get your Groups");
