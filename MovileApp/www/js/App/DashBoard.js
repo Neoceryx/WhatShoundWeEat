@@ -13,6 +13,32 @@ app.controller("DashCtrl",function ($scope, $http) {
 
     // load all Groups by UserId
     GetMyGroups();
+
+    // get Dom element to allow refresh pulldown
+    var pullHook = document.getElementById('pull-hook');
+    
+    pullHook.addEventListener('changestate', function (event) {
+        var message = '';
+
+        switch (event.state) {
+            case 'initial':
+                message = 'Pull to refresh';
+                break;
+            case 'preaction':
+                message = 'Release';                
+                break;
+            case 'action':
+                message = 'Loading...';
+                GetMyGroups();
+                break;
+        }
+
+        pullHook.innerHTML = message;
+    });
+
+    pullHook.onAction = function (done) {
+        setTimeout(done, 500);
+    };
     
     $scope.CreateNewGroup=function () {
         
@@ -28,7 +54,7 @@ app.controller("DashCtrl",function ($scope, $http) {
                 
                 // get Api response
                 var Result = response.data.split(":");
-                debugger
+                
                 // validate api result
                 switch (Result[0]) {
 
@@ -36,7 +62,7 @@ app.controller("DashCtrl",function ($scope, $http) {
                         // close the create new group dialog
                         this.newGroup.hide();
 
-                        // Redirect user to Group Details View
+                        // Redirect user to Group Details View and pass the gruopid created to the view
                         this.myNavigator.pushPage('groupInfo.html', {data: {groupId: Result[1]}})
 
                         break;
@@ -121,7 +147,7 @@ app.controller("GroupCtrl", function ($scope, $http) {
     $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
 
     var pullHook = document.getElementById('pull-hook');
-    debugger
+    
     pullHook.addEventListener('changestate', function (event) {
         var message = '';
 
