@@ -1,5 +1,7 @@
 var app = angular.module("DashApp",['onsen']);
 
+var GroupIdSelected = 0;
+
 // start Dashboard controller controller
 app.controller("DashCtrl",function ($scope, $http) {
 
@@ -35,10 +37,6 @@ app.controller("DashCtrl",function ($scope, $http) {
 
         pullHook.innerHTML = message;
     });
-
-    // pullHook.onAction = function (done) {
-    //     setTimeout(done, 500);
-    // };
     
     $scope.CreateNewGroup=function () {
         
@@ -111,9 +109,14 @@ app.controller("DashCtrl",function ($scope, $http) {
     }
     // End function
 
-    $scope.OpenGroupById=function (GroupId) {
+    $scope.OpenGroupById=function (Group) {
         
-        this.myNavigator.pushPage('groupInfo.html', {data: {groupId: GroupId}})
+        // Open GroupInfo View
+        this.myNavigator.pushPage('groupInfo.html')
+        
+        // Storage the Id for the group selected
+        GroupIdSelected = Group;
+        debugger
     }
 
     function GetMyGroups() {

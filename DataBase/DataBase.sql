@@ -31,6 +31,18 @@ CreatedDate datetime default GETDATE(),
 FOREIGN KEY(Users_Id) REFERENCES Users(Id)
 )
 
+create table GroupMembers(
+
+Id int identity(1,1) primary key,
+Groups_Id int not null,
+Users_Id int not null,
+RegisterDate datetime default GETDATE(),
+
+-- Foreign Keys
+FOREIGN KEY(Groups_Id) REFERENCES Groups(Id),
+FOREIGN KEY(Users_Id) REFERENCES Users(Id)
+)
+
 create table StatusRequest(
 
 Id int identity(1,1) primary key,
