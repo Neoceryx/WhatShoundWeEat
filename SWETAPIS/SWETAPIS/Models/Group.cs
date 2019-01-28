@@ -19,6 +19,7 @@ namespace SWETAPIS.Models
         {
             this.AdmissionRequests = new HashSet<AdmissionRequest>();
             this.VotingLists = new HashSet<VotingList>();
+            this.GroupMembers = new HashSet<GroupMember>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,7 @@ namespace SWETAPIS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VotingList> VotingLists { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GroupMember> GroupMembers { get; set; }
     }
 }

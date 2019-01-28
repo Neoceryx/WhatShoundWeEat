@@ -14,6 +14,15 @@
           <Property Name="Users_Id" Type="int" Nullable="false" />
           <Property Name="StatusRequest_Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="GroupMembers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Groups_Id" Type="int" Nullable="false" />
+          <Property Name="Users_Id" Type="int" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Groups">
           <Key>
             <PropertyRef Name="Id" />
@@ -121,6 +130,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__GroupMemb__Group__37A5467C">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="Groups_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupMemb__Users__38996AB5">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="GroupMembers" Type="Self.GroupMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMembers">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Groups__Users_Id__15502E78">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
@@ -195,6 +228,7 @@
         </Association>
         <EntityContainer Name="WSWETModelStoreContainer">
           <EntitySet Name="AdmissionRequests" EntityType="Self.AdmissionRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMembers" EntityType="Self.GroupMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusRequest" EntityType="Self.StatusRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -213,6 +247,14 @@
           <AssociationSet Name="FK__Admission__Users__1B0907CE" Association="Self.FK__Admission__Users__1B0907CE">
             <End Role="Users" EntitySet="Users" />
             <End Role="AdmissionRequests" EntitySet="AdmissionRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupMemb__Group__37A5467C" Association="Self.FK__GroupMemb__Group__37A5467C">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupMemb__Users__38996AB5" Association="Self.FK__GroupMemb__Users__38996AB5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="GroupMembers" EntitySet="GroupMembers" />
           </AssociationSet>
           <AssociationSet Name="FK__Groups__Users_Id__15502E78" Association="Self.FK__Groups__Users_Id__15502E78">
             <End Role="Users" EntitySet="Users" />
@@ -268,6 +310,7 @@
           <NavigationProperty Name="AdmissionRequests" Relationship="Self.FK__Admission__Group__1A14E395" FromRole="Groups" ToRole="AdmissionRequests" />
           <NavigationProperty Name="VotingLists" Relationship="Self.FK__VotingLis__Group__1FCDBCEB" FromRole="Groups" ToRole="VotingList" />
           <NavigationProperty Name="User" Relationship="WSWETModel.FK__Groups__Users_Id__15502E78" FromRole="Group" ToRole="User" />
+          <NavigationProperty Name="GroupMembers" Relationship="WSWETModel.FK__GroupMemb__Group__37A5467C" FromRole="Group" ToRole="GroupMember" />
         </EntityType>
         <EntityType Name="StatusRequest">
           <Key>
@@ -427,6 +470,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="VotingListItem" EntitySet="VotingListItems" />
           </AssociationSet>
+          <EntitySet Name="GroupMembers" EntityType="WSWETModel.GroupMember" />
+          <AssociationSet Name="FK__GroupMemb__Group__37A5467C" Association="WSWETModel.FK__GroupMemb__Group__37A5467C">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="GroupMember" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GroupMemb__Users__38996AB5" Association="WSWETModel.FK__GroupMemb__Users__38996AB5">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GroupMember" EntitySet="GroupMembers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -446,6 +498,7 @@
           <NavigationProperty Name="Groups" Relationship="WSWETModel.FK__Groups__Users_Id__15502E78" FromRole="User" ToRole="Group" />
           <NavigationProperty Name="Votes" Relationship="WSWETModel.FK__Votes__Users_Id__276EDEB3" FromRole="User" ToRole="Vote" />
           <NavigationProperty Name="VotingListItems" Relationship="WSWETModel.FK__VotingLis__Users__239E4DCF" FromRole="User" ToRole="VotingListItem" />
+          <NavigationProperty Name="GroupMembers" Relationship="WSWETModel.FK__GroupMemb__Users__38996AB5" FromRole="User" ToRole="GroupMember" />
         </EntityType>
         <Association Name="FK__Admission__Users__1B0907CE">
           <End Type="WSWETModel.User" Role="User" Multiplicity="1" />
@@ -491,6 +544,41 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="VotingListItem">
+              <PropertyRef Name="Users_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GroupMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Groups_Id" Type="Int32" Nullable="false" />
+          <Property Name="Users_Id" Type="Int32" Nullable="false" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Group" Relationship="WSWETModel.FK__GroupMemb__Group__37A5467C" FromRole="GroupMember" ToRole="Group" />
+          <NavigationProperty Name="User" Relationship="WSWETModel.FK__GroupMemb__Users__38996AB5" FromRole="GroupMember" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__GroupMemb__Group__37A5467C">
+          <End Type="WSWETModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="WSWETModel.GroupMember" Role="GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMember">
+              <PropertyRef Name="Groups_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GroupMemb__Users__38996AB5">
+          <End Type="WSWETModel.User" Role="User" Multiplicity="1" />
+          <End Type="WSWETModel.GroupMember" Role="GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMember">
               <PropertyRef Name="Users_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -585,6 +673,16 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Surnames" ColumnName="Surnames" />
                 <ScalarProperty Name="PersonalName" ColumnName="PersonalName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupMembers">
+            <EntityTypeMapping TypeName="WSWETModel.GroupMember">
+              <MappingFragment StoreEntitySet="GroupMembers">
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Users_Id" ColumnName="Users_Id" />
+                <ScalarProperty Name="Groups_Id" ColumnName="Groups_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

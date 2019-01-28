@@ -33,5 +33,6 @@ namespace SWETAPIS.Models
         public virtual DbSet<VotingList> VotingLists { get; set; }
         public virtual DbSet<VotingListItem> VotingListItems { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<GroupMember> GroupMembers { get; set; }
     }
 }

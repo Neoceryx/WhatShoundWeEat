@@ -22,6 +22,9 @@
         <AssociationConnector Association="WSWETModel.FK__Groups__Users_Id__15502E78" />
         <AssociationConnector Association="WSWETModel.FK__Votes__Users_Id__276EDEB3" />
         <AssociationConnector Association="WSWETModel.FK__VotingLis__Users__239E4DCF" />
+        <EntityTypeShape EntityType="WSWETModel.GroupMember" Width="1.5" PointX="5.25" PointY="10" />
+        <AssociationConnector Association="WSWETModel.FK__GroupMemb__Group__37A5467C" />
+        <AssociationConnector Association="WSWETModel.FK__GroupMemb__Users__38996AB5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

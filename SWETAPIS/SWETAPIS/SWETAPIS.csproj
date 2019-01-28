@@ -132,6 +132,9 @@
     <Compile Include="Models\Group.cs">
       <DependentUpon>WSWET.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupMember.cs">
+      <DependentUpon>WSWET.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GroupRepository.cs" />
     <Compile Include="Models\StatusRequest.cs">
       <DependentUpon>WSWET.tt</DependentUpon>
