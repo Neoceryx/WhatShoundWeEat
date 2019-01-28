@@ -17,3 +17,18 @@
     font-size: small;
     color: #E12E4B;
 }
+
+.cs_title{
+    border-bottom: 2px solid #d68600;
+}
+
+.cs_not{
+    font-size: small;
+}
+.cs_notm{
+    background-color: #17B9EB
+}
+.cs_notadmn{
+    font-size: small;
+    color: #2BE290;
+}

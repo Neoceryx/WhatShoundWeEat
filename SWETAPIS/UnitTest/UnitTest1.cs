@@ -22,7 +22,7 @@ namespace UnitTest
 
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void RegisterUserTest() {
 
             SWETAPIS.Models.UserRepository _usrBll = new SWETAPIS.Models.UserRepository();
@@ -39,6 +39,29 @@ namespace UnitTest
 
         }
 
+        //[TestMethod]
+        public void RegisterNewGroup() {
+
+            SWETAPIS.Models.GroupRepository _gpBll = new SWETAPIS.Models.GroupRepository();
+            SWETAPIS.Models.UserRepository _uBLL = new SWETAPIS.Models.UserRepository();
+
+            string GRUPONAME = "MiTech1";
+            string USERNAME = "sr d";
+            //_uBLL.GetUserIdByUserName(USERNAME);
+
+            var data = _gpBll.RegisterNewGroup(GRUPONAME, USERNAME);
+
+        }
+        
+        [TestMethod]
+        public void GetGropusByUserIdTest()
+        {
+            SWETAPIS.Models.GroupRepository _gpBLL = new SWETAPIS.Models.GroupRepository();
+
+            String UserName = "e";
+            var data = _gpBLL.GetActivesGroupsByUserId(UserName);
+        
+        }
 
     }
 }

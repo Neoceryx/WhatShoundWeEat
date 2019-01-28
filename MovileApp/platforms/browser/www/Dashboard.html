@@ -8,24 +8,131 @@
     
     <link rel="stylesheet" href="OnsenUI\css\onsenui.css">
     <link rel="stylesheet" href="OnsenUI\css\dark-onsen-css-components.min.css">
+    <link rel="stylesheet" href="css\login.css">
+
     <title>DashBoard</title>
+
 </head>
 <body ng-app="DashApp">
+    
+    <ons-navigator swipeable var="myNavigator" page="dashboard.html"></ons-navigator>
 
-    <ons-page ng-controller="DashCtrl">
-        
-        <ons-toolbar>
-            <div class="left">
-                <ons-toolbar-button>
-                    <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-                </ons-toolbar-button>
+    <!-- Group List Container -->
+    <template id="dashboard.html">
+        <ons-page ng-controller="DashCtrl">
+    
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button>
+                        <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">{{UserData.USRNAME}}</div>
+                <div class="right">
+                    <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded">
+                        <ons-icon icon="fa-sign-out"></ons-icon> log out
+                    </ons-button>
+                </div>
+            </ons-toolbar>
+
+            <ons-pull-hook id="pull-hook">Pull to refresh</ons-pull-hook>
+    
+            <!-- Search gropus container -->
+            <div style="text-align:center; margin-top: 3%">
+                <ons-row class="cs_title">
+                    <ons-col width="90%">
+                        <h3>MY GROUPS</h3>
+                    </ons-col>
+                    <ons-col width="10%">
+                        <ons-button class="rounded" style="left:-266%;" ng-click="newGroup.show();">
+                            <ons-icon icon="fa-plus"></ons-icon>
+                        </ons-button>
+                    </ons-col>
+                </ons-row>
+    
+                <p style="text-align: center; margin-top: 10px">
+                    <ons-search-input placeholder="Search" ng-model="Srch" style="width:100%"></ons-search-input>
+                </p>
+    
+                <!-- State Zero Container -->
+                <div style="margin-top: 25%;" ng-if="Groups.length == 0">
+                    <img src="img\sad.png" alt="">
+                    <h4 style="color:#dadada">you dont have grupos yet</h4>
+                    <ons-button ripple style="background-color:#1a3b6d" ng-click="newGroup.show();">Start New group</ons-button>
+                </div>
+                <!-- State Zero Container -->
+    
             </div>
-            <div class="center">SrD</div>
-        </ons-toolbar>
+            <!-- Search gropus container -->
+    
+            <!-- Start Group List Item -->
+            <ons-card ng-repeat="g in Groups | filter:Srch" ng-click="OpenGroupById(g.Id)">
+                <div class="title">
+                    <ons-row>
+                        <ons-col width="50%">
+                            <ons-icon icon="fa-users"></ons-icon> {{g.GroupName | uppercase}}
+                        </ons-col>
+    
+                        <ons-col width="50%" style="text-align:end;">
+                            <span ng-if="g.IsAdmin">
+                                <ons-icon icon="fa-bookmark" class="cs_notadmn"></ons-icon>
+                            </span>
+                            <span>
+                                <ons-icon icon="fa-user" class="cs_not"></ons-icon> <span ng-if="g.AdmissionRequests > 0"
+                                    class="notification cs_notm notification--material">{{g.AdmissionRequests}}</span>
+                            </span>
+                        </ons-col>
+                    </ons-row>
+                </div>
+            </ons-card>
+            <!-- Start Group List Item -->
+    
+            <!-- Start New Group dialog -->
+            <ons-alert-dialog var="newGroup" ng-controller="DashCtrl">
+                <div class="alert-dialog-title">New Group</div>
+                <div class="alert-dialog-content">
+                    <form name="newGroupfrm">
+                        <p>
+                            <ons-input placeholder="Group name *" type="text" name="gname" ng-model="GroupName" modifier="underbar"
+                                float required></ons-input>
+                            <span class="cs_error" ng-show="!myForm.gname.$pristine">name is required.</span>
+                        </p>
+                    </form>
+                </div>
+                <div class="alert-dialog-footer">
+                    <button class="alert-dialog-button" ng-click="newGroup.hide()">Cancel</button>
+                    <button class="alert-dialog-button" ng-click="CreateNewGroup()">Create</button>
+                </div>
+            </ons-alert-dialog>
+            <!-- Start New Group dialog -->
+    
+        </ons-page>
+    </template>
+    <!-- Group List Container -->
 
+    <!-- Group Details Container -->
+    <template id="groupInfo.html">
+        <ons-page ng-controller="GroupCtrl as page">
 
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">Pull to refresh</div>
+            </ons-toolbar>
 
-    </ons-page>
+            <ons-pull-hook id="pull-hook">Pull to refresh</ons-pull-hook>
+            
+            <ons-list>
+                <ons-list-item ng-repeat="g in Groups">{{g.GroupName}}</ons-list-item>
+            </ons-list>
+
+            {{ myNavigator.topPage.data.groupId }}
+            <p>Group View</p>       
+        
+        </ons-page>
+    </template>
+    <!-- Group Details Container -->
 
 </body>
 
