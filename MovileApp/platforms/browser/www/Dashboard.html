@@ -110,29 +110,6 @@
     </template>
     <!-- Group List Container -->
 
-    <!-- Group Details Container -->
-    <template id="groupInfo.html">
-        <ons-page ng-controller="GroupCtrl as page">
-
-            <ons-toolbar>
-                <div class="left">
-                    <ons-back-button></ons-back-button>
-                </div>
-                <div class="center">Pull to refresh</div>
-            </ons-toolbar>
-
-            <ons-pull-hook id="pull-hook">Pull to refresh</ons-pull-hook>
-            
-            <ons-list>
-                <ons-list-item ng-repeat="g in Groups">{{g.GroupName}}</ons-list-item>
-            </ons-list>
-
-            <p>Group View</p>       
-        
-        </ons-page>
-    </template>
-    <!-- Group Details Container -->
-
 </body>
 
 <script type="text/javascript" src="cordova.js"></script>
@@ -143,5 +120,6 @@
 <script src="OnsenUI\js\angular-onsenui.js"></script>
 
 <script src="js\App\DashBoard.js"></script>
+
 
 </html>

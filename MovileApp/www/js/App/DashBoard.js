@@ -1,12 +1,10 @@
 var app = angular.module("DashApp",['onsen']);
 
-var GroupIdSelected = 0;
+// Set Apis EndPoint
+const SERVER="http://192.168.0.65/";
 
 // start Dashboard controller controller
 app.controller("DashCtrl",function ($scope, $http) {
-
-    // Set Apis EndPoint
-    const SERVER="http://192.168.0.65/";
 
     // recover user infor from local storage
     $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
@@ -110,13 +108,13 @@ app.controller("DashCtrl",function ($scope, $http) {
     // End function
 
     $scope.OpenGroupById=function (Group) {
+
+        // save the group selected in local storage
+        localStorage.setItem('GroupSelected', JSON.stringify(Group))
         
-        // Open GroupInfo View
-        this.myNavigator.pushPage('groupInfo.html')
+        // redirect user to GroupDetails View
+        window.location.href = "GroupDetails.html";
         
-        // Storage the Id for the group selected
-        GroupIdSelected = Group;
-        debugger
     }
 
     function GetMyGroups() {
@@ -144,13 +142,3 @@ app.controller("DashCtrl",function ($scope, $http) {
 });
 // End Dashboard controller
 
-app.controller("GroupCtrl", function ($scope, $http) {
-    
-    // Set Apis EndPoint
-    const SERVER="http://192.168.0.65/";
-
-    // recover user infor from local storage
-    $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
-     
-
-})
