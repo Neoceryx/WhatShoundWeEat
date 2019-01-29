@@ -12,6 +12,11 @@ app.controller("GpCtrl",function ($scope) {
      // recover user infor from local storage
      $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
 
+     $scope.GoDashBoard=function () {
+        window.location.href = "Dashboard.html";
+     }
+     // End Function
+
 
 })
 // End GroupDetails controller

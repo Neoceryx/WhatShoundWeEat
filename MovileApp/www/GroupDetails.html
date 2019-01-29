@@ -21,11 +21,12 @@
             <div class="left"><ons-back-button ng-click="GoDashBoard()"></ons-back-button></div>
             <div class="center">{{UserData.USRNAME}}</div>
         </ons-toolbar>
-
-        <!-- <ons-pull-hook id="pull-hook-VoitingList">Pull to refresh</ons-pull-hook> -->
-
+        
         <ons-tabbar swipeable position="bottom">
-            <ons-tab page="voitinglist.html" label="Voting List" icon="fa-list" active></ons-tab>
+            <ons-tab label="Voting List" page="voitinglist.html"  icon="fa-list" active></ons-tab>
+            <ons-tab label="Members" page=""  icon="fa-users"></ons-tab>
+            <ons-tab label="Request" page=""  icon="fa-envelope"></ons-tab>
+            <ons-tab label="Settings" page=""  icon="fa-cogs"></ons-tab>
         </ons-tabbar>
 
     </ons-page>
