@@ -52,6 +52,14 @@
             </div>
             <!-- Group Name container -->
 
+            <!-- Voting list Statue Zero Container -->
+            <div style="text-align: center; margin-top: 25%;" ng-if="VotingList.length == 0">
+                <img src="img\sad.png" alt="">
+                <h4 style="color:#dadada">you dont have voting list yet</h4>
+                <ons-button ripple style="background-color:#1a3b6d" ng-click="newVotingList.show();">Start New voting list</ons-button>
+            </div>            
+            <!-- Voting list Statue Zero Container -->
+
             <!-- Voting List Container -->
             <ons-card ng-repeat="v in VotingList ">
                 <div class="title">{{v.ListName | uppercase}}</div>
