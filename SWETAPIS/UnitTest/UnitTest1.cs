@@ -53,7 +53,7 @@ namespace UnitTest
 
         }
         
-        [TestMethod]
+        //[TestMethod]
         public void GetGropusByUserIdTest()
         {
             SWETAPIS.Models.GroupRepository _gpBLL = new SWETAPIS.Models.GroupRepository();
@@ -61,6 +61,29 @@ namespace UnitTest
             String UserName = "e";
             var data = _gpBLL.GetActivesGroupsByUserId(UserName);
         
+        }
+
+        //[TestMethod]
+        public void RegsterNewVotingListTest() {
+
+            SWETAPIS.Models.VotinglistRepository _vlBll = new SWETAPIS.Models.VotinglistRepository();
+
+            int Groupid = 1;
+            String VlName = "VotingList Test";
+            DateTime SHDEULEDATE = DateTime.Parse("2019-01-30T13:00");
+
+            _vlBll.RegisterVotingListByGroupId(Groupid, VlName, SHDEULEDATE);
+
+        }
+
+        [TestMethod]
+        public void GetVotationListActivesTest() {
+
+            SWETAPIS.Models.VotinglistRepository _vlBLL = new SWETAPIS.Models.VotinglistRepository();
+
+            var data = _vlBLL.GetVotationListactivesByGroupId(1);
+
+
         }
 
     }

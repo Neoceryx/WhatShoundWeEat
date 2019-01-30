@@ -19,4 +19,12 @@ namespace SWETAPIS.Models
         public int AdmissionRequests { get; set; }
     }
 
+    public class VotationListViewModel {
+        public int Id { get; set; }
+        public String ListName { get; set; }
+        public Nullable<DateTime> ScheduledDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int VotesCast { get; set; }
+    }
+
 }

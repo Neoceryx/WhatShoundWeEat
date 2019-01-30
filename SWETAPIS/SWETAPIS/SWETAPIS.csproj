@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VotingListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,6 +157,7 @@
     <Compile Include="Models\VotingListItem.cs">
       <DependentUpon>WSWET.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VotinglistRepository.cs" />
     <Compile Include="Models\WSWET.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -195,6 +197,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Group\" />
+    <Folder Include="Views\VotingList\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -58,27 +58,24 @@
             </p>
 
             <!-- New Voting List Dialog Container -->
-            <ons-alert-dialog var="newVotingList" ng-controller="VotingListCtrl">
+            <ons-alert-dialog var="newVotingList">
                 <div class="alert-dialog-title">Start new voting List</div>
 
                 <div class="alert-dialog-content">
                     <form>
                         <p>
-                            <ons-input placeholder="Name" ng-model="GroupName" modifier="underbar" float type="text"></ons-input>
+                            <ons-input placeholder="Name" modifier="underbar" float></ons-input>
                         </p>
 
                         <p>
-                            <ons-input placeholder="Schedule Date" ng-model="SheduleDate" modifier="underbar" float type="datetime-local" style="width: 90%"></ons-input>
-                        </p>
-                        <p>
-                            <span class="cs_error">{{ErrorMessage}}</span>
+                            <ons-input placeholder="Schedule Date" modifier="underbar" float type="datetime-local" style="width: 90%"></ons-input>
                         </p>
                     </form>                    
                 </div>
 
                 <div class="alert-dialog-footer">
                     <button type="button" class="alert-dialog-button" ng-click="newVotingList.hide()">Cancel</button>
-                    <button type="button" class="alert-dialog-button" ng-click="CreateVotingListByGroupId()">Save</button>                
+                    <button type="button" class="alert-dialog-button">Save</button>                
                 </div>
             </ons-alert-dialog>
             <!-- New Voting List Dialog Container -->

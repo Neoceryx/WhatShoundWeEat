@@ -19,16 +19,14 @@
 
         <ons-toolbar>
             <div class="left"><ons-back-button ng-click="GoDashBoard()"></ons-back-button></div>
-            <div class="center">{{UserData.USRNAME}}</div>
         </ons-toolbar>
-
-        <!-- <ons-pull-hook id="pull-hook-VoitingList">Pull to refresh</ons-pull-hook> -->
 
         <ons-tabbar swipeable position="bottom">
             <ons-tab label="Voting List" page="voitinglist.html"  icon="fa-list" active></ons-tab>
             <ons-tab label="Members" page=""  icon="fa-users"></ons-tab>
             <ons-tab label="Request" page=""  icon="fa-envelope"></ons-tab>
-            <ons-tab label="Settings" page=""  icon="fa-cogs"></ons-tab>
+            <ons-tab label="Archived" page="" icon="fa-trash"></ons-tab>
+            <ons-tab label="Settings" page=""  icon="fa-cogs"></ons-tab>            
         </ons-tabbar>
 
     </ons-page>
@@ -37,10 +35,54 @@
     <!-- Voting List Container -->
     <template id="voitinglist.html">
         <ons-page id="Tab1" ng-controller="VotingListCtrl">
+
+            <!-- Group Name container -->
+            <div style="text-align:center; margin-top: 3%">
+                <ons-row class="cs_title">
+                    <ons-col width="90%">
+                        <h3>{{GroupInfo.GroupName | uppercase}}</h3>
+                    </ons-col>
+
+                    <ons-col width="10%">
+                        <ons-button class="rounded" style="left:-266%;" ng-click="newVotingList.show();">
+                            <ons-icon icon="fa-plus"></ons-icon>
+                        </ons-button>
+                    </ons-col>
+                </ons-row>
+            </div>
+            <!-- Group Name container -->
+
+
             <p style="text-align: center;">
                 This is the first page.
             </p>
-            <p>{{Msg}}</p>
+
+            <!-- New Voting List Dialog Container -->
+            <ons-alert-dialog var="newVotingList" ng-controller="VotingListCtrl">
+                <div class="alert-dialog-title">Start new voting List</div>
+
+                <div class="alert-dialog-content">
+                    <form>
+                        <p>
+                            <ons-input placeholder="Name" ng-model="GroupName" modifier="underbar" float type="text"></ons-input>
+                        </p>
+
+                        <p>
+                            <ons-input placeholder="Schedule Date" ng-model="SheduleDate" modifier="underbar" float type="datetime-local" style="width: 90%"></ons-input>
+                        </p>
+                        <p>
+                            <span class="cs_error">{{ErrorMessage}}</span>
+                        </p>
+                    </form>                    
+                </div>
+
+                <div class="alert-dialog-footer">
+                    <button type="button" class="alert-dialog-button" ng-click="newVotingList.hide()">Cancel</button>
+                    <button type="button" class="alert-dialog-button" ng-click="CreateVotingListByGroupId()">Save</button>                
+                </div>
+            </ons-alert-dialog>
+            <!-- New Voting List Dialog Container -->
+
         </ons-page>
     </template>
     <!-- Voting List Container -->
