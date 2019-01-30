@@ -69,7 +69,7 @@ namespace SWETAPIS.Models
             {
                 // Build the Query. to get the Votations list actives and the number of  votes casted
                 var Query = @"SELECT VotingList.Id, ListName, ScheduledDate, CreatedDate
-                ,(SELECT COUNT(*) FROM Votes INNER JOIN VotingListItems ON (Votes.VotingListItems_Id = VotingListItems.Id) WHERE VotingListItems.VotingList_Id = 1)[VotesCast]
+                ,(SELECT COUNT(*) FROM Votes INNER JOIN VotingListItems ON (Votes.VotingListItems_Id = VotingListItems.Id) WHERE VotingListItems.VotingList_Id = VotingList.Id)[VotesCast]
                 FROM VotingList where Groups_Id = {0} AND IsActive = 1";
 
                 // Executhe the query

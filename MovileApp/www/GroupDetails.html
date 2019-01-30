@@ -52,10 +52,15 @@
             </div>
             <!-- Group Name container -->
 
-
-            <p style="text-align: center;">
-                This is the first page.
-            </p>
+            <!-- Voting List Container -->
+            <ons-card ng-repeat="v in VotingList ">
+                <div class="title">{{v.ListName | uppercase}}</div>
+                <div class="content">
+                    <p>Votes: <span class="notification">{{v.VotesCast}}</span></p>                    
+                    <p ng-hide="v.ScheduledDate == null">Shedule Date: {{ v.ScheduledDate.split('(')[1].split(')/')[0] | date:'EEEE, d MMM yyyy hh:m a' }}</p>
+                </div>
+            </ons-card>
+            <!-- Voting List Container -->
 
             <!-- New Voting List Dialog Container -->
             <ons-alert-dialog var="newVotingList" ng-controller="VotingListCtrl">
@@ -98,3 +103,4 @@
 <script src="OnsenUI\js\angular-onsenui.js"></script>
 
 <script src="js\App\GroupDetails.js"></script>
+

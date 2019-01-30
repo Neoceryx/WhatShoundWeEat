@@ -83,7 +83,10 @@ app.controller("VotingListCtrl", function ($scope, $http) {
             url:SERVER +"VotingList/GetVotationListActivesByGroupId",
             params:{GROUPID:$scope.GroupInfo.Id}
         }).then(function (response) {
-            debugger
+
+            // Get api result
+            $scope.VotingList= response.data;
+            console.table(response.data);
         },function ErrorCallBack(response) {
             alert("Error To get the Voting List");
             console.log(response.data);
