@@ -27,4 +27,12 @@ namespace SWETAPIS.Models
         public int VotesCast { get; set; }
     }
 
+    public class VotingListItemViewModel {
+        public int Id { get; set; }
+        public int VotingList_Id { get; set; }
+        public String ItenName { get; set; }
+        public String UserName { get; set; }
+        public int VotesCast { get; set; }
+    }
+
 }
