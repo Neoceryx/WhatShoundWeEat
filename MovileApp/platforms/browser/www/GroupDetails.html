@@ -35,7 +35,7 @@
     <!-- Voting List Container -->
     <template id="voitinglist.html">
         <ons-page id="Tab1" ng-controller="VotingListCtrl">
-
+            
             <!-- Group Name container -->
             <div style="text-align:center; margin-top: 3%">
                 <ons-row class="cs_title">
@@ -61,7 +61,7 @@
             <!-- Voting list Statue Zero Container -->
 
             <!-- Voting List Container -->
-            <ons-card ng-repeat="v in VotingList ">
+            <ons-card ng-repeat="v in VotingList" ng-click="OpenVotingList(v.Id)">
                 <div class="title">{{v.ListName | uppercase}}</div>
                 <div class="content">
                     <p>Votes: <span class="notification">{{v.VotesCast}}</span></p>                    

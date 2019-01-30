@@ -75,6 +75,12 @@ app.controller("VotingListCtrl", function ($scope, $http) {
     }
     // End Function
 
+    $scope.OpenVotingList = function (VotinglistId) {
+        
+        window.location.href = "VotingListDetails.html";
+    }
+    // End Function
+
     function GetVotationList(params) {
         
         // start Http request to get the Active Votation list by GroupId
@@ -86,7 +92,7 @@ app.controller("VotingListCtrl", function ($scope, $http) {
 
             // Get api result
             $scope.VotingList= response.data;
-            console.table(response.data);
+
         },function ErrorCallBack(response) {
             alert("Error To get the Voting List");
             console.log(response.data);
