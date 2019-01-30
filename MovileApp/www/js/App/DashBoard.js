@@ -13,6 +13,9 @@ app.controller("DashCtrl",function ($scope, $http) {
 
     // load all Groups by UserId
     GetMyGroups();
+    
+    // get the list of Groups where the user is a guest
+    GetGroupusInvitedByUserId();
 
     // get Dom element to allow refresh pulldown
     var pullHook = document.getElementById('pull-hook');
@@ -138,7 +141,27 @@ app.controller("DashCtrl",function ($scope, $http) {
     }
     // End Function
 
+    function GetGroupusInvitedByUserId() {
+        
+        // Start http request to get the gropus where the user is member
+        $http({
+            method:"POST",
+            url:SERVER+"Group/GetInvitedGroupsActivesByUserId",
+            data:{USERNAME:$scope.UserData.USRNAME}
+        }).then(function (response) {
+
+            $scope.GropusInvited=response.data;
+           
+        },function ErrorCallBack(response) {
+            alert("Error to get the groups invited list");
+            console.log(response.data);
+        })
+        // End http request to get the gropus where the user is member
+    }
+    // End Function
+
     
 });
 // End Dashboard controller
+
 

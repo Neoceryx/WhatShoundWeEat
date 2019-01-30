@@ -14,8 +14,16 @@
 
 </head>
 <body ng-app="DashApp">
+
+    <ons-page>
+
+        <ons-tabbar swipeable position="bottom">
+            <ons-tab label="My groups" page="dashboard.html" icon="ion-home"> </ons-tab>
+            <ons-tab label="Invited Gropus" page="Invited.html" icon="fa-users"></ons-tab>
+        </ons-tabbar>
     
-    <ons-navigator swipeable var="myNavigator" page="dashboard.html"></ons-navigator>
+    </ons-page>
+
 
     <!-- Group List Container -->
     <template id="dashboard.html">
@@ -109,6 +117,40 @@
         </ons-page>
     </template>
     <!-- Group List Container -->
+
+    <template id="Invited.html">
+        <ons-page ng-controller="DashCtrl">
+        
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button>
+                        <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">{{UserData.USRNAME}}</div>
+                <div class="right">
+                    <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded">
+                        <ons-icon icon="fa-sign-out"></ons-icon> log out
+                    </ons-button>
+                </div>
+            </ons-toolbar>
+
+            <!-- Start Group List Item -->
+            <ons-card ng-repeat="g in GropusInvited | filter:Srch" ng-click="OpenGroupById(g)">
+                <div class="title">
+                    <ons-row>
+                        <ons-col width="50%">
+                            <ons-icon icon="fa-users"></ons-icon> {{g.GroupName | uppercase}}
+                        </ons-col>
+                        <ons-col width="50%" style="text-align:end;">
+                        </ons-col>
+                    </ons-row>
+                </div>
+            </ons-card>
+            <!-- Start Group List Item -->
+
+        </ons-page>
+    </template>
 
 </body>
 

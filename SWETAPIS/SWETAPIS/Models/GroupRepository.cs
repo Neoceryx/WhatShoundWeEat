@@ -118,5 +118,35 @@ namespace SWETAPIS.Models
 
         }
 
+        public List<GroupsViewModel> GetallInvitedGroupsActivesByUserId(String USERNAME) {
+
+            // Initialize the List
+            List<GroupsViewModel> InvitedGroups = new List<GroupsViewModel>();
+
+            // Handling Errors
+            try
+            {
+                // get the Id by userName
+                var UserId = _userBLL.GetUserIdByUserName(USERNAME);
+
+                // Build te Query. To get the Groups where the user is invited and the group is active
+                String Query = @"SELECT Groups.Id, GroupName FROM Groups
+                                INNER JOIN GroupMembers ON(GroupMembers.Groups_Id = Groups.Id)
+                                WHERE GroupMembers.Users_Id = {0} AND Groups.IsActive = 1";
+
+                // Execute the Query 
+                InvitedGroups = _context.Database.SqlQuery<GroupsViewModel>(Query, UserId).ToList();                
+
+            }
+            catch (Exception ex)
+            {
+            }
+            // Handling Errors
+
+            return InvitedGroups;
+
+        }
+
+
     }
 }
