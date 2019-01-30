@@ -75,8 +75,12 @@ app.controller("VotingListCtrl", function ($scope, $http) {
     }
     // End Function
 
-    $scope.OpenVotingList = function (VotinglistId) {
+    $scope.OpenVotingList = function (Votinglist) {
         
+        // storage the voting list selected
+        localStorage.setItem("VListSelected",JSON.stringify(Votinglist));
+
+        // Redirect user to VotingList View
         window.location.href = "VotingListDetails.html";
     }
     // End Function

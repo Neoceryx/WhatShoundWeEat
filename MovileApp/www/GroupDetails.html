@@ -61,7 +61,7 @@
             <!-- Voting list Statue Zero Container -->
 
             <!-- Voting List Container -->
-            <ons-card ng-repeat="v in VotingList" ng-click="OpenVotingList(v.Id)">
+            <ons-card ng-repeat="v in VotingList" ng-click="OpenVotingList(v)">
                 <div class="title">{{v.ListName | uppercase}}</div>
                 <div class="content">
                     <p>Votes: <span class="notification">{{v.VotesCast}}</span></p>                    

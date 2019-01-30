@@ -12,8 +12,35 @@
 
     <title>Voting List Details</title>
 </head>
-<body>
-    Voting List Page
+<body ng-app="VotingListApp">
+
+    <ons-page ng-controller="VotingListCtrl">
+    
+        <ons-toolbar>
+            <div class="left">
+                <ons-back-button ng-click="GoGroupDetails()"></ons-back-button>
+            </div>
+        </ons-toolbar>
+    
+        <!-- Voting List Name container -->
+        <div style="text-align:center; margin-top: 3%">
+            <ons-row class="cs_title">
+                <ons-col width="90%">
+                    <h3>{{VtList.ListName | uppercase}}</h3>
+                </ons-col>
+    
+                <ons-col width="10%">
+                    <ons-button class="rounded" style="left:-266%;" ng-click="newVotingList.show();">
+                        <ons-icon icon="fa-plus"></ons-icon>
+                    </ons-button>
+                </ons-col>
+            </ons-row>
+        </div>
+        <!-- Voting List Name container -->
+    
+    </ons-page>
+
+
 </body>
 </html>
 
@@ -23,3 +50,5 @@
 <!-- Angular js -->
 <script src="js\Angularjs1.7.6.min.js"></script>
 <script src="OnsenUI\js\angular-onsenui.js"></script>
+
+<script src="js\App\VotingListDetails.js"></script>
