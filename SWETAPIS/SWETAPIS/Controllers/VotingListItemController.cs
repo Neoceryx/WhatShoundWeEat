@@ -15,10 +15,14 @@ namespace SWETAPIS.Controllers
 
         [HttpPost]
         public int AddItemByVotingListId(String ITEMNAME, int VLISTID, String USERNAME) {
-
             return _vtliBLL.AddItemByVotingListId(ITEMNAME, VLISTID, USERNAME);
-
         }
+
+        [HttpPost]
+        public JsonResult GetItemsByVotingListId(int VLISTID) {
+            return Json(_vtliBLL.GetItemsByVotingListId(VLISTID),JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
