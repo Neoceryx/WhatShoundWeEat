@@ -12,9 +12,9 @@
 
     <title>Voting List Details</title>
 </head>
-<body ng-app="VotingListApp">
+<body ng-app="VotingListItemApp">
 
-    <ons-page ng-controller="VotingListCtrl">
+    <ons-page ng-controller="VotingListItemsCtrl">
     
         <ons-toolbar>
             <div class="left">
@@ -30,16 +30,36 @@
                 </ons-col>
     
                 <ons-col width="10%">
-                    <ons-button class="rounded" style="left:-266%;" ng-click="newVotingList.show();">
+                    <ons-button class="rounded" style="left:-266%;" ng-click="newPlaces.show();">
                         <ons-icon icon="fa-plus"></ons-icon>
                     </ons-button>
                 </ons-col>
             </ons-row>
         </div>
         <!-- Voting List Name container -->
+
+        <!-- Add New Place to vote Container -->
+        <ons-alert-dialog var="newPlaces" ng-controller="VotingListItemsCtrl">
+            <div class="alert-dialog-title">New Places</div>
+
+            <div class="alert-dialog-content">
+                <form name="myForm">
+                    <p>
+                        <ons-input type="text" name="pname" style="width: 100%" placeholder="Place Name" ng-model="PlaceName" modifier="underbar" float required></ons-input>
+                        <span class="cs_error" ng-show="myForm.pname.$touched && myForm.pname.$invalid">The name is required.</span>
+                        <span class="cs_error">{{ErrorMsg}}</span>
+                    </p>
+                </form>
+            </div>
+            
+            <div class="alert-dialog-footer">
+                <button class="alert-dialog-button" ng-click="newPlaces.hide()">Cancel</button>
+                <button class="alert-dialog-button" ng-click="AddPlacesByVotingListId()">OK</button>
+            </div>
+        </ons-alert-dialog>
+        <!-- Add New Place to vote Container -->
     
     </ons-page>
-
 
 </body>
 </html>
