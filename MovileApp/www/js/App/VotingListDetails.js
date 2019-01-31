@@ -17,6 +17,9 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
 
     $scope.ErrorMsg="";
 
+    // Display the item on Voting list    
+    GetItemsVotesByListId();
+    
     $scope.GoGroupDetails=function () {
         window.location.href="GroupDetails.html";
     }
@@ -88,6 +91,26 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
 
     }
     // End function
+
+    function GetItemsVotesByListId() {
+        
+        // Start httpRequest. got get the list of items on a voting list
+        $http({
+            method:"POST",
+            url:SERVER+"VotingListItem/GetItemsByVotingListId",
+            data:{VLISTID:$scope.VtList.Id}
+        }).then(function (response) {
+            
+            $scope.Items= response.data;
+            console.table($scope.Items);
+
+        },function ErrorCallBack(response) {
+            alert("Error to Display the Item on the list");
+            console.log(response.data);
+        })
+        // Start httpRequest. got get the list of items on a voting list
+
+    }
 
 })
 // End 

@@ -38,6 +38,21 @@
         </div>
         <!-- Voting List Name container -->
 
+        <!-- Voting List Places container -->
+        <ons-list>
+            <ons-list-header>Places</ons-list-header>
+            <ons-list-item tappable ng-repeat="i in Items">
+                    <label class="left">
+                      <ons-radio name="color" input-id="radio-{{$index}}" ></ons-radio>
+                    </label>
+                    <label for="radio-{{$index}}" class="center">
+                      {{i.ItenName}}
+                    </label>
+                    <label class="right"><span class="notification">{{i.VotesCast}}</span></label>
+                  </ons-list-item>
+        </ons-list>
+        <!-- Voting List Places container -->
+
         <!-- Add New Place to vote Container -->
         <ons-alert-dialog var="newPlaces" ng-controller="VotingListItemsCtrl">
             <div class="alert-dialog-title">New Places</div>

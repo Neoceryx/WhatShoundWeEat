@@ -75,7 +75,7 @@ namespace SWETAPIS.Models
                 String Query = @"SELECT VotingListItems.Id, VotingList_Id, ItenName, Users.UserName,(select COUNT(*) from Votes where VotingListItems_Id =  VotingListItems.Id)[VotesCast]
                                 FROM VotingListItems
                                 INNER JOIN Users ON(VotingListItems.Users_Id = Users.Id)
-                                WHERE VotingListItems.VotingList_Id = {1}
+                                WHERE VotingListItems.VotingList_Id = {0}
                                 ORDER by VotesCast DESC";
 
                 // Execute the Query
