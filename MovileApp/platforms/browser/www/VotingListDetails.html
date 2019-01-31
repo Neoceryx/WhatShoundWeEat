@@ -42,10 +42,10 @@
 
         <!-- Voting List Places container -->
         <ons-list>
-            <ons-list-header>Places</ons-list-header>
-            <ons-list-item tappable ng-repeat="i in Items">
+            <ons-list-header>Places <ons-button ng-click="SendVote()" ng-disabled="ItemIdSelected == 0">vote</ons-button> </ons-list-header>
+            <ons-list-item tappable ng-repeat="i in Items" ng-click="GetItemIdSelected(i.Id)">
                     <label class="left">
-                      <ons-radio name="color" input-id="radio-{{$index}}" ></ons-radio>
+                      <ons-radio name="color" input-id="radio-{{$index}}"></ons-radio>
                     </label>
                     <label for="radio-{{$index}}" class="center css_capitalize">
                       {{i.ItenName}}
