@@ -135,6 +135,15 @@
                 </div>
             </ons-toolbar>
 
+            <div style="text-align: center">
+                <!-- State Zero Container -->
+                <div style="margin-top: 50%;" ng-if="GropusInvited.length == 0" >
+                    <img src="img\sad.png" alt="">
+                    <h4 style="color:#dadada">you have not been invited to a group yet</h4>
+                </div>
+                <!-- State Zero Container -->
+            </div>
+
             <!-- Start Group List Item -->
             <ons-card ng-repeat="g in GropusInvited | filter:Srch" ng-click="OpenGroupById(g)">
                 <div class="title">

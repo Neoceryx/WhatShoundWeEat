@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <link rel="stylesheet" href="OnsenUI\css\onsenui.css">
+    <link rel="stylesheet" href="OnsenUI\css\dark-onsen-css-components.min.css">
+    <link rel="stylesheet" href="css\login.css">
+
+    <title>Voting List Details</title>
+</head>
+<body ng-app="VotingListItemApp">
+
+    <ons-page ng-controller="VotingListItemsCtrl">
+    
+        <ons-toolbar>
+            <div class="left">
+                <ons-back-button ng-click="GoGroupDetails()"></ons-back-button>
+            </div>
+        </ons-toolbar>
+        
+        <ons-pull-hook id="pull-hook"></ons-pull-hook>
+
+        <!-- Voting List Name container -->
+        <div style="text-align:center; margin-top: 3%">
+            <ons-row class="cs_title">
+                <ons-col width="90%">
+                    <h3>{{VtList.ListName | uppercase}}</h3>
+                </ons-col>
+    
+                <ons-col width="10%">
+                    <ons-button class="rounded" style="left:-266%;" ng-click="newPlaces.show();">
+                        <ons-icon icon="fa-plus"></ons-icon>
+                    </ons-button>
+                </ons-col>
+            </ons-row>
+        </div>
+        <!-- Voting List Name container -->
+
+        <!-- Voting List Places container -->
+        <ons-list>
+            <ons-list-header>Places <ons-button ng-click="SendVote()" ng-disabled="ItemIdSelected == 0">vote</ons-button> </ons-list-header>
+            <ons-list-item tappable ng-repeat="i in Items" ng-click="GetItemIdSelected(i.Id)">
+                    <label class="left">
+                      <ons-radio name="color" input-id="radio-{{$index}}"></ons-radio>
+                    </label>
+                    <label for="radio-{{$index}}" class="center css_capitalize">
+                      {{i.ItenName}}
+                    </label>
+                    <label class="right"><span class="notification">{{i.VotesCast}}</span></label>
+                  </ons-list-item>
+        </ons-list>
+        <!-- Voting List Places container -->
+
+        <!-- Add New Place to vote Container -->
+        <ons-alert-dialog var="newPlaces" ng-controller="VotingListItemsCtrl">
+            <div class="alert-dialog-title">New Places</div>
+
+            <div class="alert-dialog-content">
+                <form name="myForm">
+                    <p>
+                        <ons-input type="text" name="pname" style="width: 100%" placeholder="Place Name" ng-model="PlaceName" modifier="underbar" float required></ons-input>
+                        <span class="cs_error" ng-show="myForm.pname.$touched && myForm.pname.$invalid">The name is required.</span>
+                        <span class="cs_error">{{ErrorMsg}}</span>
+                    </p>
+                </form>
+            </div>
+            
+            <div class="alert-dialog-footer">
+                <button class="alert-dialog-button" ng-click="newPlaces.hide()">Cancel</button>
+                <button class="alert-dialog-button" ng-click="AddPlacesByVotingListId()">OK</button>
+            </div>
+        </ons-alert-dialog>
+        <!-- Add New Place to vote Container -->
+    
+    </ons-page>
+
+</body>
+</html>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script src="OnsenUI\js\onsenui.min.js"></script>
+
+<!-- Angular js -->
+<script src="js\Angularjs1.7.6.min.js"></script>
+<script src="OnsenUI\js\angular-onsenui.js"></script>
+
+<script src="js\App\VotingListDetails.js"></script>
