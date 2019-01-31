@@ -86,12 +86,21 @@ namespace UnitTest
 
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetInvitedGropusTest() {
             
             SWETAPIS.Models.GroupRepository _gpBLL = new SWETAPIS.Models.GroupRepository();
 
             var data = _gpBLL.GetallInvitedGroupsActivesByUserId("ed");
+
+        }
+
+        [TestMethod]
+        public void RegisterVoteTest() {
+
+            SWETAPIS.Models.VoteRepository _vtBll = new SWETAPIS.Models.VoteRepository();
+
+            var data = _vtBll.RegisterVoteByUserIdAndItemId("sr d", 1, 3);
 
         }
 

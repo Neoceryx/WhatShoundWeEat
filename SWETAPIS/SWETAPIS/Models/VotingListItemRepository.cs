@@ -63,5 +63,35 @@ namespace SWETAPIS.Models
         }
         // End function
 
+        public List<VotingListItemViewModel> GetItemsByVotingListId(int VLISTID) {
+
+            // Initialize the list
+            List<VotingListItemViewModel> Items = new List<VotingListItemViewModel>();
+
+            // Handling Errors
+            try
+            {
+                // Build the Query, Get Item on the Votaing list and the number of votes that they have
+                String Query = @"SELECT VotingListItems.Id, VotingList_Id, ItenName, Users.UserName,(select COUNT(*) from Votes where VotingListItems_Id =  VotingListItems.Id)[VotesCast]
+                                FROM VotingListItems
+                                INNER JOIN Users ON(VotingListItems.Users_Id = Users.Id)
+                                WHERE VotingListItems.VotingList_Id = {0}
+                                ORDER by VotesCast DESC";
+
+                // Execute the Query
+                Items = _context.Database.SqlQuery<VotingListItemViewModel>(Query, VLISTID).ToList();
+
+            }
+            catch (Exception ex)
+            {
+            }
+            // Handling Errors
+
+            return Items;
+
+        }
+        // End  
+
+
     }
 }
