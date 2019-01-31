@@ -43,7 +43,7 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
                 url:SERVER + "VotingListItem/AddItemByVotingListId",
                 data:Data
             }).then(function (response) {
-                debugger
+                
                 // Get api Result
                 var Result = response.data;
 
@@ -63,7 +63,7 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
 
                     case "0":
                         // Display User Message
-                        ons.notification.toast('New Item was added to the list', { timeout: 1000, animation: 'fall' })                        
+                        ons.notification.toast('New Item was added to the list', { timeout: 2000, animation: 'fall' })                        
                         
                         // Clear form and Error Message
                         $scope.PlaceName=""
@@ -114,6 +114,32 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
         // Start httpRequest. got get the list of items on a voting list
 
     }
+
+    var pullHook = document.getElementById('pull-hook');
+
+    pullHook.addEventListener('changestate', function (event) {
+        var message = '';
+
+        switch (event.state) {
+            case 'initial':
+                message = 'Pull to refresh';
+                break;
+            case 'preaction':
+                message = 'Release';
+                break;
+            case 'action':
+                message = 'Loading...';
+                // Refresh the Items on the voting list
+                GetItemsVotesByListId();
+                break;
+        }
+
+        pullHook.innerHTML = message;
+    });
+
+    pullHook.onAction = function (done) {
+        setTimeout(done, 1000);
+    };
 
 })
 // End 

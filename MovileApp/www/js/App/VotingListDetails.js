@@ -115,5 +115,31 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
 
     }
 
+    var pullHook = document.getElementById('pull-hook');
+
+    pullHook.addEventListener('changestate', function (event) {
+        var message = '';
+
+        switch (event.state) {
+            case 'initial':
+                message = 'Pull to refresh';
+                break;
+            case 'preaction':
+                message = 'Release';
+                break;
+            case 'action':
+                message = 'Loading...';
+                // Refresh the Items on the voting list
+                GetItemsVotesByListId();
+                break;
+        }
+
+        pullHook.innerHTML = message;
+    });
+
+    pullHook.onAction = function (done) {
+        setTimeout(done, 1000);
+    };
+
 })
 // End 
