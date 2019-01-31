@@ -26,7 +26,7 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
     // End Function
 
     $scope.AddPlacesByVotingListId=function () {
-        debugger
+        
         // Call form register Fields Validations
         if ($scope.myForm.$valid) {
 
@@ -43,7 +43,7 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
                 url:SERVER + "VotingListItem/AddItemByVotingListId",
                 data:Data
             }).then(function (response) {
-                debugger
+                
                 // Get api Result
                 var Result = response.data;
 
@@ -63,16 +63,19 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
 
                     case "0":
                         // Display User Message
-                        ons.notification.toast('New Item was added to the list', { timeout: 1000, animation: 'fall' })                        
+                        ons.notification.toast('New Item was added to the list', { timeout: 2000, animation: 'fall' })                        
                         
                         // Clear form and Error Message
                         $scope.PlaceName=""
                         $scope.ErrorMsg="";
 
+                        // Hide New Place Dialog
+                        this.newPlaces.hide();
+
                         break;
                 
                     default:
-                    $scope.ErrorMsg="This place already appears on this list, please type a different place"
+                        $scope.ErrorMsg="This place already appears on this list, please type a different place"
                         break;
                 }
 

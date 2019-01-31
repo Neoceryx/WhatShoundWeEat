@@ -26,7 +26,7 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
     // End Function
 
     $scope.AddPlacesByVotingListId=function () {
-        debugger
+        
         // Call form register Fields Validations
         if ($scope.myForm.$valid) {
 
@@ -69,10 +69,13 @@ app.controller("VotingListItemsCtrl",function ($scope, $http) {
                         $scope.PlaceName=""
                         $scope.ErrorMsg="";
 
+                        // Hide New Place Dialog
+                        this.newPlaces.hide();
+
                         break;
                 
                     default:
-                    $scope.ErrorMsg="This place already appears on this list, please type a different place"
+                        $scope.ErrorMsg="This place already appears on this list, please type a different place"
                         break;
                 }
 
