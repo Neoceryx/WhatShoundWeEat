@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdmissionRequestController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\GroupMembersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VotesController.cs" />
     <Compile Include="Controllers\VotingListController.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Models\GroupMember.cs">
       <DependentUpon>WSWET.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupMembersRepository.cs" />
     <Compile Include="Models\GroupRepository.cs" />
     <Compile Include="Models\StatusRequest.cs">
       <DependentUpon>WSWET.tt</DependentUpon>
@@ -203,6 +205,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AdmissionRequest\" />
+    <Folder Include="Views\GroupMembers\" />
     <Folder Include="Views\Group\" />
     <Folder Include="Views\Votes\" />
     <Folder Include="Views\VotingListItem\" />

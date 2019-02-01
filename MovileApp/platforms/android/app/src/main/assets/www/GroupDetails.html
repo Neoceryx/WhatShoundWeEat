@@ -103,14 +103,29 @@
     <!-- Admissins request Conatiner -->
     <template id="AdmsnRequest.html">
         <ons-page ng-controller="RequestCtrl">
-            
-            <ons-list>
-                <ons-list-header>Admisison Requests</ons-list-header>
-                <ons-list-item ng-repeat="r in Requests" tappable>
-                    <div class="left">{{r.UserName | uppercase}}</div>
-                    <div class="right"><span class="notification" ng-if="r.StatusRequest_Id != 0">new</span></div>
-                </ons-list-item>
-            </ons-list>
+
+            <ons-card ng-repeat="r in Requests" ng-click="OpenRequestDialogOptn(r)">
+                <div class="title"></div>
+                <div class="content">
+                
+                    <ons-row>
+                        <ons-col width="80%">{{r.UserName | uppercase}}</ons-col>
+                        <ons-col width="20%"><span class="notification" ng-hide="r.StatusRequest_Id != 1">new</span></ons-col>
+                    </ons-row>
+                
+                </div>
+            </ons-card>
+
+            <!-- Request Option Dialog -->
+            <ons-alert-dialog var="ReqsDlg">
+                    <div class="alert-dialog-title">Admission Request from {{RequesSelected.UserName}}</div>
+                    <div class="alert-dialog-footer">
+                      <button class="alert-dialog-button" ng-click="ReqsDlg.hide()">Cancel</button>
+                      <button class="alert-dialog-button" ng-click="ChangeRequestStatus(4)">Reject</button>
+                      <button class="alert-dialog-button" ng-click="ChangeRequestStatus(3)">Approve</button>
+                    </div>
+            </ons-alert-dialog>
+            <!-- Request Option Dialog -->
 
         </ons-page>
     </template>

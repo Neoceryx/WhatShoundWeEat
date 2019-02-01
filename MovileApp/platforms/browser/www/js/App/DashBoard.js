@@ -13,11 +13,15 @@ app.controller("DashCtrl",function ($scope, $http) {
 
     $scope.ErrorMsg="you have not been invited to a group yet"
 
-    // load all Groups by UserId
-    GetMyGroups();
-    
-    // get the list of Groups where the user is a guest
-    GetGroupusInvitedByUserId();
+    angular.element(document).ready(function () {
+
+        // load all Groups by UserId
+        GetMyGroups();
+
+        // get the list of Groups where the user is a guest
+        GetGroupusInvitedByUserId();
+
+    });
 
     // get Dom element to allow refresh pulldown
     var pullHook = document.getElementById('pull-hook');
@@ -173,9 +177,13 @@ app.controller("JoinGCtrl", function ($scope, $http) {
     $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
 
     $scope.GroupNameSelected="";
-    
-    // Display all availables groups
-    GetAllAvailablesGroups();
+
+    angular.element(document).ready(function () {
+
+        // Display all availables groups
+        GetAllAvailablesGroups();
+
+    });
 
     $scope.OpenRequestDialog=function (Group) {
         
