@@ -136,8 +136,6 @@
                 </div>
             </ons-toolbar>
 
-            <!-- <ons-pull-hook id="pull-hook">Pull to refresh</ons-pull-hook> -->
-
             <div style="text-align: center">
                 <!-- State Zero Container -->
                 <div style="margin-top: 50%;" ng-if="GropusInvited.length == 0" >
@@ -165,6 +163,7 @@
     </template>
     <!-- Groups where the user is Invited Container -->
 
+    <!-- Gropus availables to join Container -->
     <template id="SendAdmrequest.html">
         <ons-page ng-controller="JoinGCtrl">
         
@@ -181,15 +180,31 @@
                     </ons-button>
                 </div>
             </ons-toolbar>
-
-            <!-- <ons-pull-hook id="pull-hook-invg">Pull to refresh</ons-pull-hook> -->
         
-            <ons-list>
-                <ons-list-item ng-repeat="g in GpAvlb">{{g.GroupName}}</ons-list-item>
-            </ons-list>
+            <p style="text-align: center; margin-top: 10px">
+                <ons-search-input placeholder="Search" ng-model="Srch" style="width:100%"></ons-search-input>
+            </p>
 
+            <ons-card ng-repeat="g in GpAvlb | filter:Srch" ng-click="OpenRequestDialog(g)">
+                <div class="title">{{g.GroupName | uppercase }}</div>
+            </ons-card>
+        
+            <!-- Send Admission Request Dialog -->
+            <ons-alert-dialog var="AddReq">
+                <div class="alert-dialog-title" style="text-align:center">Send request to Join to</div>
+                <div class="alert-dialog-content" style="text-align:center">
+                    {{ Group.GroupName | uppercase}} - Group
+                </div>
+                <div class="alert-dialog-footer">
+                    <button class="alert-dialog-button" ng-click="AddReq.hide()">Cancel</button>
+                    <button class="alert-dialog-button" ng-click="SendAddmissionRequest()">OK</button>
+                </div>
+            </ons-alert-dialog>
+            <!-- Send Admission Request Dialog -->
+        
         </ons-page>
     </template>
+    <!-- Gropus availables to join Container -->
 
 </body>
 

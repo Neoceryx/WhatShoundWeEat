@@ -184,11 +184,10 @@
             <p style="text-align: center; margin-top: 10px">
                 <ons-search-input placeholder="Search" ng-model="Srch" style="width:100%"></ons-search-input>
             </p>
-        
-            <ons-list>
-                <ons-list-item ng-repeat="g in GpAvlb | filter:Srch" tappable ng-click="OpenRequestDialog(g)">{{g.GroupName
-                    | uppercase }}</ons-list-item>
-            </ons-list>
+
+            <ons-card ng-repeat="g in GpAvlb | filter:Srch" ng-click="OpenRequestDialog(g)">
+                <div class="title">{{g.GroupName | uppercase }}</div>
+            </ons-card>
         
             <!-- Send Admission Request Dialog -->
             <ons-alert-dialog var="AddReq">

@@ -191,17 +191,31 @@ app.controller("JoinGCtrl", function ($scope, $http) {
         // start httpRequest to Register Addmission Request
         $http({
             method:"POST",
-            url:SERVER+"",
+            url:SERVER+"AdmissionRequest/NewAdmissionRequestByUserAndGroupId",
             data:{ USERNAME:$scope.UserData.USRNAME, GROUPID:$scope.Group.Id }
         }).then(function (response) {
-            debugger
+            
+            // get Api Result
+            var Result = response.data;
+
+            // Validate api Result
+            if (Result == "0") {
+                // Display User Message
+                ons.notification.toast('Admission Request has been Sended.', { timeout: 2500, animation: 'fall' }) 
+                
+                // Close Send Request Dialog
+                this.AddReq.hide();
+            } else {
+                // Display User Message
+                ons.notification.toast('you allready has been sent Admission Request to this group.', { timeout: 2500, animation: 'fall' })
+            }
+
         },function ErrorCallBack(response) {
             alert("Error To send te Admission Request");
             console.log(response.data);
         })
         // start httpRequest to Register Addmission Request
-        debugger
-        
+                
     }
     // End Function
 

@@ -171,34 +171,53 @@ app.controller("JoinGCtrl", function ($scope, $http) {
 
     // recover user infor from local storage
     $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
+
+    $scope.GroupNameSelected="";
     
-    // get Dom element to allow refresh pulldown
-    var pullHook = document.getElementById('pull-hook-invg');
-    
+    // Display all availables groups
     GetAllAvailablesGroups();
 
-    pullHook.addEventListener('changestate', function (event) {
-        var message = '';
+    $scope.OpenRequestDialog=function (Group) {
+        
+        $scope.Group = Group;          
+        // Open Dialog to send Addmission Request      
+        this.AddReq.show();
 
-        switch (event.state) {
-            case 'initial':
-                message = 'Pull to refresh';
-                break;
-            case 'preaction':
-                message = 'Release';
-                break;
-            case 'action':
-                message = 'Loading...';
-                GetAllAvailablesGroups();
-                break;
-        }
+    }
+    // End function
 
-        pullHook.innerHTML = message;
-    });
+    $scope.SendAddmissionRequest=function (){
 
-    pullHook.onAction = function (done) {
-        setTimeout(done, 1000);
-    };
+        // start httpRequest to Register Addmission Request
+        $http({
+            method:"POST",
+            url:SERVER+"AdmissionRequest/NewAdmissionRequestByUserAndGroupId",
+            data:{ USERNAME:$scope.UserData.USRNAME, GROUPID:$scope.Group.Id }
+        }).then(function (response) {
+            
+            // get Api Result
+            var Result = response.data;
+
+            // Validate api Result
+            if (Result == "0") {
+                // Display User Message
+                ons.notification.toast('Admission Request has been Sended.', { timeout: 2500, animation: 'fall' }) 
+                
+                // Close Send Request Dialog
+                this.AddReq.hide();
+            } else {
+                // Display User Message
+                ons.notification.toast('you allready has been sent Admission Request to this group.', { timeout: 2500, animation: 'fall' })
+            }
+
+        },function ErrorCallBack(response) {
+            alert("Error To send te Admission Request");
+            console.log(response.data);
+        })
+        // start httpRequest to Register Addmission Request
+                
+    }
+    // End Function
 
     function GetAllAvailablesGroups() {
         
@@ -219,7 +238,6 @@ app.controller("JoinGCtrl", function ($scope, $http) {
         // End http request
     }
     // End Function
-
 
 });
 // End JoinGroup controller
