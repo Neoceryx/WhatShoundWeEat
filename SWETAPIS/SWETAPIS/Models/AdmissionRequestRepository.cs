@@ -58,6 +58,28 @@ namespace SWETAPIS.Models
         }
         // End Function
 
+        public int GetAdmissionRequestByGroupId(int GROUPID) {
+
+            // initialize the variable
+            int RequestQty = 0;
+
+            // Handling Errors
+            try
+            {
+                // get the number of new Request Recibed by groupid
+                RequestQty = _context.AdmissionRequests.Where(x => x.Groups_Id == GROUPID && x.StatusRequest_Id == 1).Count();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            // Handling Errors
+
+            return RequestQty;
+
+        }
+        // End Function
 
     }
 }

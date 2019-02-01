@@ -21,6 +21,10 @@ namespace SWETAPIS.Controllers
             return _adRequestBll.SendAddmissionRequest(USERNAME, GROUPID);
         }
 
+        [HttpPost]
+        public int GetAdmissionRequestByGroupId(int GROUPID) {
+            return _adRequestBll.GetAdmissionRequestByGroupId(GROUPID);
+        }
 
     }
 }
