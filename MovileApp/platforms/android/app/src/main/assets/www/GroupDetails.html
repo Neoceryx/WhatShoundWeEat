@@ -35,7 +35,7 @@
     <!-- Voting List Container -->
     <template id="voitinglist.html">
         <ons-page id="Tab1" ng-controller="VotingListCtrl">
-
+            
             <!-- Group Name container -->
             <div style="text-align:center; margin-top: 3%">
                 <ons-row class="cs_title">
@@ -52,30 +52,46 @@
             </div>
             <!-- Group Name container -->
 
+            <!-- Voting list Statue Zero Container -->
+            <div style="text-align: center; margin-top: 25%;" ng-if="VotingList.length == 0">
+                <img src="img\sad.png" alt="">
+                <h4 style="color:#dadada">you dont have voting list yet</h4>
+                <ons-button ripple style="background-color:#1a3b6d" ng-click="newVotingList.show();">Start New voting list</ons-button>
+            </div>            
+            <!-- Voting list Statue Zero Container -->
 
-            <p style="text-align: center;">
-                This is the first page.
-            </p>
+            <!-- Voting List Container -->
+            <ons-card ng-repeat="v in VotingList" ng-click="OpenVotingList(v)">
+                <div class="title">{{v.ListName | uppercase}}</div>
+                <div class="content">
+                    <p>Votes: <span class="notification">{{v.VotesCast}}</span></p>                    
+                    <p ng-hide="v.ScheduledDate == null">Shedule Date: {{ v.ScheduledDate.split('(')[1].split(')/')[0] | date:'EEEE, d MMM yyyy hh:m a' }}</p>
+                </div>
+            </ons-card>
+            <!-- Voting List Container -->
 
             <!-- New Voting List Dialog Container -->
-            <ons-alert-dialog var="newVotingList">
+            <ons-alert-dialog var="newVotingList" ng-controller="VotingListCtrl">
                 <div class="alert-dialog-title">Start new voting List</div>
 
                 <div class="alert-dialog-content">
                     <form>
                         <p>
-                            <ons-input placeholder="Name" modifier="underbar" float></ons-input>
+                            <ons-input placeholder="Name" ng-model="GroupName" modifier="underbar" float type="text"></ons-input>
                         </p>
 
                         <p>
-                            <ons-input placeholder="Schedule Date" modifier="underbar" float type="datetime-local" style="width: 90%"></ons-input>
+                            <ons-input placeholder="Schedule Date" ng-model="SheduleDate" modifier="underbar" float type="datetime-local" style="width: 90%"></ons-input>
+                        </p>
+                        <p>
+                            <span class="cs_error">{{ErrorMessage}}</span>
                         </p>
                     </form>                    
                 </div>
 
                 <div class="alert-dialog-footer">
                     <button type="button" class="alert-dialog-button" ng-click="newVotingList.hide()">Cancel</button>
-                    <button type="button" class="alert-dialog-button">Save</button>                
+                    <button type="button" class="alert-dialog-button" ng-click="CreateVotingListByGroupId()">Save</button>                
                 </div>
             </ons-alert-dialog>
             <!-- New Voting List Dialog Container -->
@@ -95,3 +111,4 @@
 <script src="OnsenUI\js\angular-onsenui.js"></script>
 
 <script src="js\App\GroupDetails.js"></script>
+

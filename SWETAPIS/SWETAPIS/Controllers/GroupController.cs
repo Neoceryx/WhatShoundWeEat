@@ -33,5 +33,10 @@ namespace SWETAPIS.Controllers
             return Json(_gpBLL.GetallInvitedGroupsActivesByUserId(USERNAME), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult GetAvailableGroups(String USERNAME) {
+            return Json(_gpBLL.GetAllAvailableGroups(USERNAME),JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

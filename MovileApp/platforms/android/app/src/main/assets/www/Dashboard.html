@@ -14,8 +14,16 @@
 
 </head>
 <body ng-app="DashApp">
+
+    <ons-page>
+
+        <ons-tabbar position="bottom">
+            <ons-tab label="My groups" page="dashboard.html" icon="ion-home"> </ons-tab>
+            <ons-tab label="Invited Gropus" page="Invited.html" icon="fa-users"></ons-tab>
+            <ons-tab label="Join Group" page="SendAdmrequest.html" icon="fa-handshake-o"></ons-tab>
+        </ons-tabbar>
     
-    <ons-navigator swipeable var="myNavigator" page="dashboard.html"></ons-navigator>
+    </ons-page>
 
     <!-- Group List Container -->
     <template id="dashboard.html">
@@ -109,6 +117,79 @@
         </ons-page>
     </template>
     <!-- Group List Container -->
+
+    <!-- Groups where the user is Invited Container -->
+    <template id="Invited.html">
+        <ons-page ng-controller="DashCtrl">
+        
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button>
+                        <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">{{UserData.USRNAME}}</div>
+                <div class="right">
+                    <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded">
+                        <ons-icon icon="fa-sign-out"></ons-icon> log out
+                    </ons-button>
+                </div>
+            </ons-toolbar>
+
+            <!-- <ons-pull-hook id="pull-hook">Pull to refresh</ons-pull-hook> -->
+
+            <div style="text-align: center">
+                <!-- State Zero Container -->
+                <div style="margin-top: 50%;" ng-if="GropusInvited.length == 0" >
+                    <img src="img\sad.png" alt="">
+                    <h4 style="color:#dadada">{{ErrorMsg}}</h4>
+                </div>
+                <!-- State Zero Container -->
+            </div>
+
+            <!-- Start Group List Item -->
+            <ons-card ng-repeat="g in GropusInvited | filter:Srch" ng-click="OpenGroupById(g)">
+                <div class="title">
+                    <ons-row>
+                        <ons-col width="50%">
+                            <ons-icon icon="fa-users"></ons-icon> {{g.GroupName | uppercase}}
+                        </ons-col>
+                        <ons-col width="50%" style="text-align:end;">
+                        </ons-col>
+                    </ons-row>
+                </div>
+            </ons-card>
+            <!-- Start Group List Item -->
+
+        </ons-page>
+    </template>
+    <!-- Groups where the user is Invited Container -->
+
+    <template id="SendAdmrequest.html">
+        <ons-page ng-controller="JoinGCtrl">
+        
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button>
+                        <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">{{UserData.USRNAME}}</div>
+                <div class="right">
+                    <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded">
+                        <ons-icon icon="fa-sign-out"></ons-icon> log out
+                    </ons-button>
+                </div>
+            </ons-toolbar>
+
+            <!-- <ons-pull-hook id="pull-hook-invg">Pull to refresh</ons-pull-hook> -->
+        
+            <ons-list>
+                <ons-list-item ng-repeat="g in GpAvlb">{{g.GroupName}}</ons-list-item>
+            </ons-list>
+
+        </ons-page>
+    </template>
 
 </body>
 

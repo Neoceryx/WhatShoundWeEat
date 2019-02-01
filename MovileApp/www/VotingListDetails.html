@@ -50,7 +50,10 @@
                     <label for="radio-{{$index}}" class="center css_capitalize">
                       {{i.ItenName}}
                     </label>
-                    <label class="right"><span class="notification">{{i.VotesCast}}</span></label>
+                    <span class="right">
+                        <span class="notification">{{i.VotesCast}}</span>
+                        <span style="margin-left:20px"><ons-icon icon="fa-trash"></ons-icon></span>                        
+                    </span>
                   </ons-list-item>
         </ons-list>
         <!-- Voting List Places container -->

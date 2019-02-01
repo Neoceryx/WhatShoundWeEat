@@ -147,6 +147,34 @@ namespace SWETAPIS.Models
 
         }
 
+        public List<GroupsViewModel> GetAllAvailableGroups(String USERNAME) {
+
+            // Initialize the list
+            List<GroupsViewModel> AvailableGroups = new List<GroupsViewModel>();
+
+            // Handling Errors
+            try
+            {
+                // Recover UserId from UserName
+                var UserId = _userBLL.GetUserIdByUserName(USERNAME);
+
+                // Build the Query. Get Groups list where a user is not member or admin
+                String Query = @"SELECT Groups.Id, GroupName FROM Groups WHERE Users_Id != {0} AND Groups.IsActive = 1 AND Id NOT IN(SELECT Groups.Id FROM Groups
+                                INNER JOIN GroupMembers ON (GroupMembers.Groups_Id = Groups.Id)
+                                WHERE GroupMembers.Users_Id = {0})";
+
+                // Execute the query
+                AvailableGroups = _context.Database.SqlQuery<GroupsViewModel>(Query, UserId).ToList();
+
+            }
+            catch (Exception ex)
+            {
+            }
+            // Handling Errors
+
+            return AvailableGroups;
+
+        }
 
     }
 }

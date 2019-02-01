@@ -11,6 +11,8 @@ app.controller("DashCtrl",function ($scope, $http) {
     
     $scope.GroupName="";
 
+    $scope.ErrorMsg="you have not been invited to a group yet"
+
     // load all Groups by UserId
     GetMyGroups();
     
@@ -33,6 +35,7 @@ app.controller("DashCtrl",function ($scope, $http) {
             case 'action':
                 message = 'Loading...';
                 GetMyGroups();
+                GetGroupusInvitedByUserId()
                 break;
         }
 
@@ -64,9 +67,8 @@ app.controller("DashCtrl",function ($scope, $http) {
                         // Clear Group Name    
                         $scope.GroupName = "";
                         
-                        // Redirect user to Group Details View and pass the gruopid created to the view
-                        this.myNavigator.pushPage('groupInfo.html', {data: {groupId: Result[1]}})
-
+                        // redirect user to GroupDetails View
+                        window.location.href = "GroupDetails.html";
                         break;
 
                     case "1":                        
@@ -164,4 +166,65 @@ app.controller("DashCtrl",function ($scope, $http) {
 });
 // End Dashboard controller
 
+// Start JoinGroup controller
+app.controller("JoinGCtrl", function ($scope, $http) {
+
+    // recover user infor from local storage
+    $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
+
+    $scope.GroupNameSelected="";
+    
+    // Display all availables groups
+    GetAllAvailablesGroups();
+
+    $scope.OpenRequestDialog=function (Group) {
+        
+        $scope.Group = Group;          
+        // Open Dialog to send Addmission Request      
+        this.AddReq.show();
+
+    }
+    // End function
+
+    $scope.SendAddmissionRequest=function (){
+
+        // start httpRequest to Register Addmission Request
+        $http({
+            method:"POST",
+            url:SERVER+"",
+            data:{ USERNAME:$scope.UserData.USRNAME, GROUPID:$scope.Group.Id }
+        }).then(function (response) {
+            debugger
+        },function ErrorCallBack(response) {
+            alert("Error To send te Admission Request");
+            console.log(response.data);
+        })
+        // start httpRequest to Register Addmission Request
+        debugger
+        
+    }
+    // End Function
+
+    function GetAllAvailablesGroups() {
+        
+        // Start http request
+        $http({
+            method:"POST",
+            url:SERVER+"Group/GetAvailableGroups",
+            data:{USERNAME:$scope.UserData.USRNAME}
+        }).then(function (response) {
+            
+            // get the groups list where a user is not member or admin
+            $scope.GpAvlb=response.data;
+
+        },function ErrorCallBack(response) {
+            alert("Eror to display Availables Groups list");
+            console.log(response.data);
+        })
+        // End http request
+    }
+    // End Function
+
+});
+// End JoinGroup controller
 

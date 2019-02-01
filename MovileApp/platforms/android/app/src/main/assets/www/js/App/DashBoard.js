@@ -11,8 +11,13 @@ app.controller("DashCtrl",function ($scope, $http) {
     
     $scope.GroupName="";
 
+    $scope.ErrorMsg="you have not been invited to a group yet"
+
     // load all Groups by UserId
     GetMyGroups();
+    
+    // get the list of Groups where the user is a guest
+    GetGroupusInvitedByUserId();
 
     // get Dom element to allow refresh pulldown
     var pullHook = document.getElementById('pull-hook');
@@ -30,6 +35,7 @@ app.controller("DashCtrl",function ($scope, $http) {
             case 'action':
                 message = 'Loading...';
                 GetMyGroups();
+                GetGroupusInvitedByUserId()
                 break;
         }
 
@@ -61,9 +67,8 @@ app.controller("DashCtrl",function ($scope, $http) {
                         // Clear Group Name    
                         $scope.GroupName = "";
                         
-                        // Redirect user to Group Details View and pass the gruopid created to the view
-                        this.myNavigator.pushPage('groupInfo.html', {data: {groupId: Result[1]}})
-
+                        // redirect user to GroupDetails View
+                        window.location.href = "GroupDetails.html";
                         break;
 
                     case "1":                        
@@ -138,7 +143,84 @@ app.controller("DashCtrl",function ($scope, $http) {
     }
     // End Function
 
+    function GetGroupusInvitedByUserId() {
+        
+        // Start http request to get the gropus where the user is member
+        $http({
+            method:"POST",
+            url:SERVER+"Group/GetInvitedGroupsActivesByUserId",
+            data:{USERNAME:$scope.UserData.USRNAME}
+        }).then(function (response) {
+
+            $scope.GropusInvited=response.data;
+           
+        },function ErrorCallBack(response) {
+            alert("Error to get the groups invited list");
+            console.log(response.data);
+        })
+        // End http request to get the gropus where the user is member
+    }
+    // End Function
+
     
 });
 // End Dashboard controller
+
+// Start JoinGroup controller
+app.controller("JoinGCtrl", function ($scope, $http) {
+
+    // recover user infor from local storage
+    $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
+    
+    // get Dom element to allow refresh pulldown
+    var pullHook = document.getElementById('pull-hook-invg');
+    
+    GetAllAvailablesGroups();
+
+    pullHook.addEventListener('changestate', function (event) {
+        var message = '';
+
+        switch (event.state) {
+            case 'initial':
+                message = 'Pull to refresh';
+                break;
+            case 'preaction':
+                message = 'Release';
+                break;
+            case 'action':
+                message = 'Loading...';
+                GetAllAvailablesGroups();
+                break;
+        }
+
+        pullHook.innerHTML = message;
+    });
+
+    pullHook.onAction = function (done) {
+        setTimeout(done, 1000);
+    };
+
+    function GetAllAvailablesGroups() {
+        
+        // Start http request
+        $http({
+            method:"POST",
+            url:SERVER+"Group/GetAvailableGroups",
+            data:{USERNAME:$scope.UserData.USRNAME}
+        }).then(function (response) {
+            
+            // get the groups list where a user is not member or admin
+            $scope.GpAvlb=response.data;
+
+        },function ErrorCallBack(response) {
+            alert("Eror to display Availables Groups list");
+            console.log(response.data);
+        })
+        // End http request
+    }
+    // End Function
+
+
+});
+// End JoinGroup controller
 

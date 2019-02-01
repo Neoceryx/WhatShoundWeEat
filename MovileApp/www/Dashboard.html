@@ -17,13 +17,13 @@
 
     <ons-page>
 
-        <ons-tabbar swipeable position="bottom">
+        <ons-tabbar position="bottom">
             <ons-tab label="My groups" page="dashboard.html" icon="ion-home"> </ons-tab>
             <ons-tab label="Invited Gropus" page="Invited.html" icon="fa-users"></ons-tab>
+            <ons-tab label="Join Group" page="SendAdmrequest.html" icon="fa-handshake-o"></ons-tab>
         </ons-tabbar>
     
     </ons-page>
-
 
     <!-- Group List Container -->
     <template id="dashboard.html">
@@ -118,6 +118,7 @@
     </template>
     <!-- Group List Container -->
 
+    <!-- Groups where the user is Invited Container -->
     <template id="Invited.html">
         <ons-page ng-controller="DashCtrl">
         
@@ -139,7 +140,7 @@
                 <!-- State Zero Container -->
                 <div style="margin-top: 50%;" ng-if="GropusInvited.length == 0" >
                     <img src="img\sad.png" alt="">
-                    <h4 style="color:#dadada">you have not been invited to a group yet</h4>
+                    <h4 style="color:#dadada">{{ErrorMsg}}</h4>
                 </div>
                 <!-- State Zero Container -->
             </div>
@@ -160,6 +161,51 @@
 
         </ons-page>
     </template>
+    <!-- Groups where the user is Invited Container -->
+
+    <!-- Gropus availables to join Container -->
+    <template id="SendAdmrequest.html">
+        <ons-page ng-controller="JoinGCtrl">
+        
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button>
+                        <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">{{UserData.USRNAME}}</div>
+                <div class="right">
+                    <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded">
+                        <ons-icon icon="fa-sign-out"></ons-icon> log out
+                    </ons-button>
+                </div>
+            </ons-toolbar>
+        
+            <p style="text-align: center; margin-top: 10px">
+                <ons-search-input placeholder="Search" ng-model="Srch" style="width:100%"></ons-search-input>
+            </p>
+        
+            <ons-list>
+                <ons-list-item ng-repeat="g in GpAvlb | filter:Srch" tappable ng-click="OpenRequestDialog(g)">{{g.GroupName
+                    | uppercase }}</ons-list-item>
+            </ons-list>
+        
+            <!-- Send Admission Request Dialog -->
+            <ons-alert-dialog var="AddReq">
+                <div class="alert-dialog-title" style="text-align:center">Send request to Join to</div>
+                <div class="alert-dialog-content" style="text-align:center">
+                    {{ Group.GroupName | uppercase}} - Group
+                </div>
+                <div class="alert-dialog-footer">
+                    <button class="alert-dialog-button" ng-click="AddReq.hide()">Cancel</button>
+                    <button class="alert-dialog-button" ng-click="SendAddmissionRequest()">OK</button>
+                </div>
+            </ons-alert-dialog>
+            <!-- Send Admission Request Dialog -->
+        
+        </ons-page>
+    </template>
+    <!-- Gropus availables to join Container -->
 
 </body>
 
