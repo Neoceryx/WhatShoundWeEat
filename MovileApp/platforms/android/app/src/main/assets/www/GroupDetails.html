@@ -105,7 +105,11 @@
         <ons-page ng-controller="RequestCtrl">
             
             <ons-list>
-                <ons-list-item ng-repeat="r in Requests">{{r.UserName}}</ons-list-item>
+                <ons-list-header>Admisison Requests</ons-list-header>
+                <ons-list-item ng-repeat="r in Requests" tappable>
+                    <div class="left">{{r.UserName | uppercase}}</div>
+                    <div class="right"><span class="notification" ng-if="r.StatusRequest_Id != 0">new</span></div>
+                </ons-list-item>
             </ons-list>
 
         </ons-page>

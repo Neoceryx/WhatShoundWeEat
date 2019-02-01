@@ -105,8 +105,23 @@
         <ons-page ng-controller="RequestCtrl">
             
             <ons-list>
-                <ons-list-item ng-repeat="r in Requests">{{r.UserName}}</ons-list-item>
+                <ons-list-header>Admisison Requests</ons-list-header>
+                <ons-list-item ng-repeat="r in Requests" ng-click="OpenRequestDialogOptn(r)">
+                    <div class="left">{{r.UserName | uppercase}}</div>
+                    <div class="right"><span class="notification" ng-hide="r.StatusRequest_Id != 1">new</span></div>
+                </ons-list-item>
             </ons-list>
+
+            <!-- Request Option Dialog -->
+            <ons-alert-dialog var="ReqsDlg">
+                    <div class="alert-dialog-title">Admission Request from {{RequesSelected.UserName}}</div>
+                    <div class="alert-dialog-footer">
+                      <button class="alert-dialog-button" ng-click="ReqsDlg.hide()">Cancel</button>
+                      <button class="alert-dialog-button" ng-click="alertDialog.hide()">Reject</button>
+                      <button class="alert-dialog-button" ng-click="alertDialog.hide()">Approve</button>
+                    </div>
+            </ons-alert-dialog>
+            <!-- Request Option Dialog -->
 
         </ons-page>
     </template>

@@ -132,7 +132,53 @@ app.controller("RequestCtrl",function ($scope, $http) {
     // recover Group data as a json object
     $scope.GroupInfo = JSON.parse(localStorage.getItem("GroupSelected"))
     
-    GeAllAdmisisonRequest();
+    $scope.RequesSelected;
+
+
+    angular.element(document).ready(function () {
+
+        GeAllAdmisisonRequest();
+
+    });
+
+
+    $scope.OpenRequestDialogOptn=function (Request) {
+        
+        // storage the Request selected
+        $scope.RequesSelected = Request;
+        
+        // validate if the Request is new
+        if (Request.StatusRequest_Id == 1) {
+
+            // chahnge the Request to viewd
+            Request.StatusRequest_Id = 2;
+
+            // Start HttpRequest to mark request as Viewed
+            $http({
+                method: "POST",
+                url: SERVER + "AdmissionRequest/ChangeRequestStatusByRequestId",
+                data: { REQUESTID: Request.Id, STATUS: 2 }
+            }).then(function (result) {
+
+                // Open Request option Dialog
+                this.ReqsDlg.show();
+
+            }, function ErrorCallBack(response) {
+                alert("Error To mark the request as viewed");
+                console.log(response.data);
+            })
+            // Start HttpRequest to mark request as Viewed
+
+        } else {
+
+            // Open Request option Dialog
+            this.ReqsDlg.show();
+        }
+        // End Request validtion
+
+        // USERID:Request.Users_Id,
+    }
+    // end function
 
     function GeAllAdmisisonRequest() {
         // Start HttpRequest

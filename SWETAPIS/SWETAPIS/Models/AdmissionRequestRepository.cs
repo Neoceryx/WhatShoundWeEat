@@ -109,5 +109,28 @@ namespace SWETAPIS.Models
 
         }
 
+        public void ChangeRequestStatusById(int REQUESTID, int STATUS) {
+
+            // Handling Errors
+            try
+            {
+
+                // recover the Request to change the status
+                var Request = _context.AdmissionRequests.Where(x => x.Id == REQUESTID).FirstOrDefault();
+
+                // set the new Status
+                Request.StatusRequest_Id = STATUS;
+
+                // save Database changes
+                _context.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+            }
+            // Handling Errors
+
+        }
+
     }
 }

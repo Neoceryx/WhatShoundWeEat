@@ -31,5 +31,11 @@ namespace SWETAPIS.Controllers
             return Json(_adRequestBll.GetAllAdmisisonRequestByGroupId(GROUPID), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public void ChangeRequestStatusByRequestId(int REQUESTID, int STATUS) {
+            _adRequestBll.ChangeRequestStatusById(REQUESTID, STATUS);
+     
+        }
+
     }
 }
