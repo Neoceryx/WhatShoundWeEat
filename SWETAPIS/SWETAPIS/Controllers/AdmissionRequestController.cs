@@ -26,5 +26,10 @@ namespace SWETAPIS.Controllers
             return _adRequestBll.GetAdmissionRequestByGroupId(GROUPID);
         }
 
+        [HttpPost]
+        public JsonResult GetAllAdmissionRequestByGroupId(int GROUPID) {
+            return Json(_adRequestBll.GetAllAdmisisonRequestByGroupId(GROUPID), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

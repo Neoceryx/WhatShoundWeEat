@@ -4,7 +4,7 @@ var app = angular.module("GpApp",["onsen"]);
 const SERVER="http://192.168.0.65/";
 
 // Start GroupDetails controller
-app.controller("GpCtrl",function ($scope) {
+app.controller("GpCtrl",function ($scope, $http) {
 
     // recover Group data as a json object
     $scope.GroupInfo = JSON.parse(localStorage.getItem("GroupSelected"))
@@ -12,11 +12,30 @@ app.controller("GpCtrl",function ($scope) {
      // recover user infor from local storage
      $scope.UserData = JSON.parse(localStorage.getItem("UserInfo"));
 
+     GetAdmissionRequestQty();
+
      $scope.GoDashBoard=function () {
         window.location.href = "Dashboard.html";
      }
      // End Function
 
+     function GetAdmissionRequestQty(params) {
+         // Star httpRequest
+         $http({
+             method:"POST",
+             url:SERVER+"AdmissionRequest/GetAdmissionRequestByGroupId",
+             data:{GROUPID:$scope.GroupInfo.Id}
+         }).then(function (response) {
+             
+            $scope.AdReques=response.data;
+
+         },function ErrorCallBack(response) {
+             alert("Error to get the Number od Admissin Request");
+             console.log(response.data);
+         })
+         // End HttpRequest
+     }
+     // End Function
 
 })
 // End GroupDetails controller
@@ -106,3 +125,33 @@ app.controller("VotingListCtrl", function ($scope, $http) {
 
 })
 // start voting List controller
+
+// start Admissin Request controller
+app.controller("RequestCtrl",function ($scope, $http) {
+
+    // recover Group data as a json object
+    $scope.GroupInfo = JSON.parse(localStorage.getItem("GroupSelected"))
+    
+    GeAllAdmisisonRequest();
+
+    function GeAllAdmisisonRequest() {
+        // Start HttpRequest
+        $http({
+            method:"POST",
+            url:SERVER+"AdmissionRequest/GetAllAdmissionRequestByGroupId",
+            data:{GROUPID:$scope.GroupInfo.Id}
+        }).then(function (response) {
+
+            $scope.Requests = response.data;
+            console.table($scope.Requests)
+        
+        },function (response) {
+            alert("Error to get the Admission Request");
+            console.log(response.data);
+        })
+        // End HttpRequest
+    }
+    // End Function
+
+})
+// End Admissin Request controller

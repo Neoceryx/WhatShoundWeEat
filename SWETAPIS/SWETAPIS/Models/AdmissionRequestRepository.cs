@@ -81,5 +81,33 @@ namespace SWETAPIS.Models
         }
         // End Function
 
+        public List<AdmissionRequestViewModel> GetAllAdmisisonRequestByGroupId(int GROUPID) {
+
+            // Initialize Request List
+            List<AdmissionRequestViewModel> Requests = new List<AdmissionRequestViewModel>();
+
+            // Handling Errors
+            try
+            {
+
+                String Query = @"select AdmissionRequests.Id, Users_Id, Users.UserName, StatusRequest_Id FROM AdmissionRequests
+                                INNER JOIN Users ON (AdmissionRequests.Users_Id = Users.Id)
+                                where Groups_Id = {0} AND StatusRequest_Id IN (1,2)
+                                ORDER BY StatusRequest_Id";
+
+                // Execute the query
+                Requests = _context.Database.SqlQuery<AdmissionRequestViewModel>(Query, GROUPID).ToList();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            // Handling Errors
+
+            return Requests;
+
+        }
+
     }
 }

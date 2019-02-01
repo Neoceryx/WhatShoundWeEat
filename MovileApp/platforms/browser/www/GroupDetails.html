@@ -23,8 +23,8 @@
 
         <ons-tabbar swipeable position="bottom">
             <ons-tab label="Voting List" page="voitinglist.html"  icon="fa-list" active></ons-tab>
+            <ons-tab label="Request" page="AdmsnRequest.html"  icon="fa-envelope" badge="{{AdReques}}"></ons-tab>
             <ons-tab label="Members" page=""  icon="fa-users"></ons-tab>
-            <ons-tab label="Request" page=""  icon="fa-envelope" badge="{{AdReques}}"></ons-tab>
             <ons-tab label="Archived" page="" icon="fa-trash"></ons-tab>
             <ons-tab label="Settings" page=""  icon="fa-cogs"></ons-tab>            
         </ons-tabbar>
@@ -99,6 +99,17 @@
         </ons-page>
     </template>
     <!-- Voting List Container -->
+
+    <!-- Admissins request Conatiner -->
+    <template id="AdmsnRequest.html">
+        <ons-page ng-controller="RequestCtrl">
+            
+            <ons-list>
+                <ons-list-item ng-repeat="r in Requests">{{r.UserName}}</ons-list-item>
+            </ons-list>
+
+        </ons-page>
+    </template>
 
 </body>
 </html>

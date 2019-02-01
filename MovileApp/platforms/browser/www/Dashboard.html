@@ -121,20 +121,6 @@
     <!-- Groups where the user is Invited Container -->
     <template id="Invited.html">
         <ons-page ng-controller="DashCtrl">
-        
-            <ons-toolbar>
-                <div class="left">
-                    <ons-toolbar-button>
-                        <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-                    </ons-toolbar-button>
-                </div>
-                <div class="center">{{UserData.USRNAME}}</div>
-                <div class="right">
-                    <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded">
-                        <ons-icon icon="fa-sign-out"></ons-icon> log out
-                    </ons-button>
-                </div>
-            </ons-toolbar>
 
             <div style="text-align: center">
                 <!-- State Zero Container -->
@@ -166,20 +152,6 @@
     <!-- Gropus availables to join Container -->
     <template id="SendAdmrequest.html">
         <ons-page ng-controller="JoinGCtrl">
-        
-            <ons-toolbar>
-                <div class="left">
-                    <ons-toolbar-button>
-                        <ons-icon icon="ion-navicon, material:md-menu"></ons-icon>
-                    </ons-toolbar-button>
-                </div>
-                <div class="center">{{UserData.USRNAME}}</div>
-                <div class="right">
-                    <ons-button modifier="quiet" ng-click="logOutUser()" class="rounded">
-                        <ons-icon icon="fa-sign-out"></ons-icon> log out
-                    </ons-button>
-                </div>
-            </ons-toolbar>
         
             <p style="text-align: center; margin-top: 10px">
                 <ons-search-input placeholder="Search" ng-model="Srch" style="width:100%"></ons-search-input>

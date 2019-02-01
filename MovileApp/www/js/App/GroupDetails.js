@@ -125,3 +125,33 @@ app.controller("VotingListCtrl", function ($scope, $http) {
 
 })
 // start voting List controller
+
+// start Admissin Request controller
+app.controller("RequestCtrl",function ($scope, $http) {
+
+    // recover Group data as a json object
+    $scope.GroupInfo = JSON.parse(localStorage.getItem("GroupSelected"))
+    
+    GeAllAdmisisonRequest();
+
+    function GeAllAdmisisonRequest() {
+        // Start HttpRequest
+        $http({
+            method:"POST",
+            url:SERVER+"AdmissionRequest/GetAllAdmissionRequestByGroupId",
+            data:{GROUPID:$scope.GroupInfo.Id}
+        }).then(function (response) {
+
+            $scope.Requests = response.data;
+            console.table($scope.Requests)
+        
+        },function (response) {
+            alert("Error to get the Admission Request");
+            console.log(response.data);
+        })
+        // End HttpRequest
+    }
+    // End Function
+
+})
+// End Admissin Request controller

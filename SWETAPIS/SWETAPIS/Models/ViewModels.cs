@@ -35,4 +35,12 @@ namespace SWETAPIS.Models
         public int VotesCast { get; set; }
     }
 
+    public class AdmissionRequestViewModel {
+        public int Id { get; set; }
+        public int Users_Id { get; set; }
+        public String UserName { get; set; }
+        public int StatusRequest_Id { get; set; }
+    }
+
+
 }
